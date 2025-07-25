@@ -729,7 +729,7 @@
 								"exec": [
 									"\r",
 									"\r",
-									"\r",
+									"let jsonData = pm.response.json();\r",
 									"    pm.test(\"Registro do pet excluído com sucesso\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
