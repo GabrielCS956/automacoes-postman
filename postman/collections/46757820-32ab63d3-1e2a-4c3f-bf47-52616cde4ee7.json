@@ -83,7 +83,7 @@
 							"script": {
 								"id": "3c07bbe0-dcf3-4772-ad22-a892b96680bf",
 								"exec": [
-									"\r",
+									"let jsonData = pm.response.json();\r",
 									"    pm.test(\"Pet adicionado com sucesso\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
@@ -216,7 +216,7 @@
 							"script": {
 								"id": "f8cd8535-df5f-4700-85cf-fd58858a579e",
 								"exec": [
-									"\r",
+									"let jsonData = pm.response.json();\r",
 									"pm.test(\"Lista de pets encontrada\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
