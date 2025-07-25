@@ -392,7 +392,7 @@
 							"script": {
 								"id": "bc08fff7-bc1c-4fad-beb3-e7de4298226c",
 								"exec": [
-									"    \r",
+									"    let jsonData = pm.response.json();\r",
 									"    pm.test(\"Pet atualizado com sucesso\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
