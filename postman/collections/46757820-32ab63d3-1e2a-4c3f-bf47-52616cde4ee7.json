@@ -457,7 +457,7 @@
 							"script": {
 								"id": "51bd3042-01a3-4c90-bff6-e2ce972df9a9",
 								"exec": [
-									"\r",
+									"let jsonData = pm.response.json();\r",
 									" setTimeout(function () { \r",
 									"pm.sendRequest({\r",
 									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
@@ -612,7 +612,7 @@
 								"id": "244d781d-e3b0-46b4-908f-d8048624bb59",
 								"exec": [
 									"\r",
-									"\r",
+									"let jsonData = pm.response.json();\r",
 									"    pm.test(\"Status do pet atualizado com sucesso\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
