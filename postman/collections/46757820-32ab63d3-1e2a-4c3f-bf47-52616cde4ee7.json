@@ -16,7 +16,7 @@
 							"script": {
 								"id": "ea65bc88-7430-4517-a338-38bd609de1cb",
 								"exec": [
-									"\r",
+									"let jsonData = pm.response.json();\r",
 									"pm.test(\"Validar upload da imagem para cadastro do pet\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
