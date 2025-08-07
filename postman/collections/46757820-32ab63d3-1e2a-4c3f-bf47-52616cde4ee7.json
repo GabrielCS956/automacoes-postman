@@ -612,7 +612,7 @@
 								"exec": [
 									"\r",
 									"let jsonData = pm.response.json();\r",
-									"    pm.test(\"Status do pet atualizado com sucesso\", () => {\r",
+									"    pm.test(\"Validar atualização do pet\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
 									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
