@@ -398,7 +398,6 @@
 									"   if(pm.response.code === 200){\r",
 									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
 									"     pm.expect(jsonData.code, \"Sem sucesso\").to.eql(200);\r",
-									"    pm.collectionVariables.set(\"IDPet\",jsonData.id);\r",
 									"   }\r",
 									"   else{\r",
 									"     pm.expect.fail(JSON.stringify(jsonData) + \" RETURN STATUS CODE : \" + pm.response.code)\r",
