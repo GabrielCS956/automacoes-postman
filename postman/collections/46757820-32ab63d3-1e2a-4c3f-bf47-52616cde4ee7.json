@@ -772,7 +772,7 @@
 			"id": "46757820-825e53f5-899a-40b2-a498-551a9eb29500"
 		},
 		{
-			"name": "User",
+			"name": "User - Access to Petstore orders",
 			"item": [
 				{
 					"name": "Create list of users with given input array",
