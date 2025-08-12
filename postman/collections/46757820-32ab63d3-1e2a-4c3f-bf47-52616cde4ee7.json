@@ -823,7 +823,7 @@
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
 		},
 		{
-			"name": "Store",
+			"name": "Store - Access to Petstore orders",
 			"item": [
 				{
 					"name": "https://petstore.swagger.io/v2/store/inventory",
