@@ -853,6 +853,99 @@
 						"description": "Generated from cURL: curl 'https://petstore.swagger.io/v2/store/inventory' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' \\\r\n  -H 'api_key: special-key' \\\r\n  -b 'cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://petstore.swagger.io/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
 					},
 					"response": []
+				},
+				{
+					"name": "Place an order for a pet",
+					"id": "46757820-84032f91-d1ff-4d96-bbc1-d9e6e5d3f17b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://petstore.swagger.io"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://petstore.swagger.io/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 9,\n  \"petId\": 23,\n  \"quantity\": 2,\n  \"shipDate\": \"2025-08-14T00:17:25.005Z\",\n  \"status\": \"placed\",\n  \"complete\": true\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/store/order",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://petstore.swagger.io/v2/store/order' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099' \\\r\n  -H 'origin: https://petstore.swagger.io' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://petstore.swagger.io/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw $'{\\n  \"id\": 9,\\n  \"petId\": 23,\\n  \"quantity\": 2,\\n  \"shipDate\": \"2025-08-14T00:17:25.005Z\",\\n  \"status\": \"placed\",\\n  \"complete\": true\\n}\\n\\n'"
+					},
+					"response": []
 				}
 			],
 			"id": "46757820-a7764ec5-ec2c-4873-8df1-ed71d6d26a7f"
@@ -907,99 +1000,6 @@
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
-		},
-		{
-			"name": "Place an order for a pet",
-			"id": "46757820-84032f91-d1ff-4d96-bbc1-d9e6e5d3f17b",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					},
-					{
-						"key": "accept-language",
-						"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
-					},
-					{
-						"key": "content-type",
-						"value": "application/json"
-					},
-					{
-						"key": "origin",
-						"value": "https://petstore.swagger.io"
-					},
-					{
-						"key": "priority",
-						"value": "u=1, i"
-					},
-					{
-						"key": "referer",
-						"value": "https://petstore.swagger.io/"
-					},
-					{
-						"key": "sec-ch-ua",
-						"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
-					},
-					{
-						"key": "sec-ch-ua-mobile",
-						"value": "?0"
-					},
-					{
-						"key": "sec-ch-ua-platform",
-						"value": "\"Windows\""
-					},
-					{
-						"key": "sec-fetch-dest",
-						"value": "empty"
-					},
-					{
-						"key": "sec-fetch-mode",
-						"value": "cors"
-					},
-					{
-						"key": "sec-fetch-site",
-						"value": "same-origin"
-					},
-					{
-						"key": "user-agent",
-						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-					},
-					{
-						"key": "Cookie",
-						"value": "cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"id\": 9,\n  \"petId\": 23,\n  \"quantity\": 2,\n  \"shipDate\": \"2025-08-14T00:17:25.005Z\",\n  \"status\": \"placed\",\n  \"complete\": true\n}\n\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://petstore.swagger.io/v2/store/order",
-					"protocol": "https",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"store",
-						"order"
-					]
-				},
-				"description": "Generated from cURL: curl 'https://petstore.swagger.io/v2/store/order' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099' \\\r\n  -H 'origin: https://petstore.swagger.io' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://petstore.swagger.io/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw $'{\\n  \"id\": 9,\\n  \"petId\": 23,\\n  \"quantity\": 2,\\n  \"shipDate\": \"2025-08-14T00:17:25.005Z\",\\n  \"status\": \"placed\",\\n  \"complete\": true\\n}\\n\\n'"
-			},
-			"response": []
 		}
 	],
 	"event": [
