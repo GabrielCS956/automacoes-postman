@@ -772,6 +772,48 @@
 			"id": "46757820-825e53f5-899a-40b2-a498-551a9eb29500"
 		},
 		{
+			"name": "Store - Access to Petstore orders",
+			"item": [
+				{
+					"name": "https://petstore.swagger.io/v2/store/inventory",
+					"id": "46757820-d7735151-0463-4fd1-809c-6df666126040",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "api_key",
+								"value": "special-key"
+							}
+						],
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/store/inventory",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"store",
+								"inventory"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/store/inventory' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
+					},
+					"response": []
+				}
+			],
+			"id": "46757820-a7764ec5-ec2c-4873-8df1-ed71d6d26a7f"
+		},
+		{
 			"name": "User - Operations about user",
 			"item": [
 				{
@@ -821,48 +863,6 @@
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
-		},
-		{
-			"name": "Store - Access to Petstore orders",
-			"item": [
-				{
-					"name": "https://petstore.swagger.io/v2/store/inventory",
-					"id": "46757820-d7735151-0463-4fd1-809c-6df666126040",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "api_key",
-								"value": "special-key"
-							}
-						],
-						"url": {
-							"raw": "https://petstore.swagger.io/v2/store/inventory",
-							"protocol": "https",
-							"host": [
-								"petstore",
-								"swagger",
-								"io"
-							],
-							"path": [
-								"v2",
-								"store",
-								"inventory"
-							]
-						},
-						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/store/inventory' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
-					},
-					"response": []
-				}
-			],
-			"id": "46757820-a7764ec5-ec2c-4873-8df1-ed71d6d26a7f"
 		}
 	],
 	"event": [
