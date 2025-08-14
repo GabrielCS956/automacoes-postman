@@ -483,7 +483,7 @@
 									"    }\r",
 									"\r",
 									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
-									"    pm.collectionVariables.set(\"IDPet\", randomId);\r",
+									"    pm.environment.set(\"IDPet\", randomId);\r",
 									"    console.log(\"IDPet selecionado e salvo na variável de ambiente:\", randomId);\r",
 									"});"
 								],
@@ -981,12 +981,9 @@
 							}
 						},
 						"url": {
-							"raw": "https://petstore.swagger.io/v2/user/createWithList",
-							"protocol": "https",
+							"raw": "{{baseURL}}/v2/user/createWithList",
 							"host": [
-								"petstore",
-								"swagger",
-								"io"
+								"{{baseURL}}"
 							],
 							"path": [
 								"v2",
