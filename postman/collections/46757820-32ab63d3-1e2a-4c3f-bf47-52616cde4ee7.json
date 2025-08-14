@@ -811,7 +811,7 @@
 					"response": []
 				},
 				{
-					"name": "https://petstore.swagger.io/v2/store/inventory",
+					"name": "Returns pet inventories by status",
 					"id": "46757820-685f85c7-499d-4095-a59f-757a3bdf3d77",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
