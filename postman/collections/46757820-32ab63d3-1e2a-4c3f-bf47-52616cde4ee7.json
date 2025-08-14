@@ -775,42 +775,6 @@
 			"name": "Store - Access to Petstore orders",
 			"item": [
 				{
-					"name": "https://petstore.swagger.io/v2/store/inventory",
-					"id": "46757820-d7735151-0463-4fd1-809c-6df666126040",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							},
-							{
-								"key": "api_key",
-								"value": "special-key"
-							}
-						],
-						"url": {
-							"raw": "https://petstore.swagger.io/v2/store/inventory",
-							"protocol": "https",
-							"host": [
-								"petstore",
-								"swagger",
-								"io"
-							],
-							"path": [
-								"v2",
-								"store",
-								"inventory"
-							]
-						},
-						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/store/inventory' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
-					},
-					"response": []
-				},
-				{
 					"name": "Returns pet inventories by status",
 					"id": "46757820-685f85c7-499d-4095-a59f-757a3bdf3d77",
 					"protocolProfileBehavior": {
