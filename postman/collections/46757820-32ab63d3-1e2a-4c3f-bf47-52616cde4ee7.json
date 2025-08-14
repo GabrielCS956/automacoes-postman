@@ -909,7 +909,7 @@
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
 		},
 		{
-			"name": "https://petstore.swagger.io/v2/store/order",
+			"name": "Place an order for a pet",
 			"id": "46757820-84032f91-d1ff-4d96-bbc1-d9e6e5d3f17b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
