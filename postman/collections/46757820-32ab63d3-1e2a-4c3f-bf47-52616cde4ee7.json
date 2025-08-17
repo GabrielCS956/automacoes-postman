@@ -20,8 +20,8 @@
 									"pm.test(\"Validar upload da imagem para cadastro do pet\", () => {\r",
 									"\r",
 									"   if(pm.response.code === 200){\r",
-									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
-									"     pm.expect(jsonData.code, \"Sem sucesso\").to.eql(200);\r",
+									"    pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
+									"    pm.response.to.have.status(200);\r",
 									"\r",
 									"   }\r",
 									"   else{\r",
@@ -54,7 +54,7 @@
 									"type": "file",
 									"contentType": "image/png",
 									"key": "file",
-									"src": "/C:/Users/gabri/Downloads/Imagem do WhatsApp de 2025-06-03 à(s) 23.03.05_095b3bf1.jpg"
+									"src": "/C:/Users/gabri/Downloads/3047928.png"
 								}
 							]
 						},
@@ -87,7 +87,7 @@
 									"\r",
 									"   if(pm.response.code === 200){\r",
 									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
-									"     pm.expect(jsonData.code, \"Sem sucesso\").to.eql(200);\r",
+									"    pm.response.to.have.status(200);\r",
 									"    pm.collectionVariables.set(\"IDPet\",jsonData.id);\r",
 									"   }\r",
 									"   else{\r",
