@@ -1152,6 +1152,39 @@
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
+		},
+		{
+			"name": "https://petstore.swagger.io/v2/store/order/5",
+			"id": "46757820-41d3940a-cfa8-4dd4-8ebd-f6577ccf0fea",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/store/order/5",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"store",
+						"order",
+						"5"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/store/order/5' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
 		}
 	],
 	"event": [
