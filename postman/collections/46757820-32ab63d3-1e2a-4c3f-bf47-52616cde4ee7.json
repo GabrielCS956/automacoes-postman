@@ -1070,7 +1070,7 @@
 					"response": []
 				},
 				{
-					"name": "https://petstore.swagger.io/v2/store/order/5",
+					"name": "Find purchase order by ID",
 					"id": "46757820-7ff70964-b9f3-49ed-b622-eec69b95f432",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
