@@ -556,7 +556,6 @@
 									"}, function (err, res) {\r",
 									"    if (err || res.code !== 200) {\r",
 									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
-									"        postman.setNextRequest(null); \r",
 									"        return;\r",
 									"    }\r",
 									"\r",
@@ -567,7 +566,6 @@
 									"\r",
 									"    if (validPets.length === 0) {\r",
 									"        console.error(\"Nenhum pet válido encontrado. Parando execução.\");\r",
-									"        postman.setNextRequest(null); \r",
 									"        return;\r",
 									"    }\r",
 									"\r",
@@ -585,10 +583,7 @@
 									"    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];\r",
 									"    pm.variables.set(\"status\", randomStatus);\r",
 									"    console.log(\"Status aleatório definido:\", randomStatus);\r",
-									"\r",
-									"\r",
-									"});\r",
-									""
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -680,7 +675,6 @@
 									"}, function (err, res) {\r",
 									"    if (err || res.code !== 200) {\r",
 									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
-									"        postman.setNextRequest(null); \r",
 									"        return;\r",
 									"    }\r",
 									"\r",
@@ -691,7 +685,6 @@
 									"\r",
 									"    if (validPets.length === 0) {\r",
 									"        console.error(\"Nenhum pet válido encontrado. Parando execução.\");\r",
-									"        postman.setNextRequest(null); \r",
 									"        return;\r",
 									"    }\r",
 									"\r",
