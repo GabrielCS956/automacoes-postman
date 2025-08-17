@@ -1103,7 +1103,7 @@
 					"response": []
 				},
 				{
-					"name": "https://petstore.swagger.io/v2/store/order/5",
+					"name": "Delete purchase order by ID",
 					"id": "46757820-41d3940a-cfa8-4dd4-8ebd-f6577ccf0fea",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
