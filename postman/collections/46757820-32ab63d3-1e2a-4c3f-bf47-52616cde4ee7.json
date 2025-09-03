@@ -491,7 +491,7 @@
 									"    }\r",
 									"\r",
 									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
-									"    pm.variables.set(\"IDPet\", randomId);\r",
+									"    pm.collectionVariables.set(\"IDPet\", randomId);\r",
 									"    console.log(\"IDPet selecionado:\", randomId);\r",
 									"\r",
 									"});"
