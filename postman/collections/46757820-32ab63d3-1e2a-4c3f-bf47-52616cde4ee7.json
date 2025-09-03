@@ -1274,6 +1274,10 @@
 		{
 			"key": "petCustomTagId",
 			"value": ""
+		},
+		{
+			"key": "IDPetDlt",
+			"value": ""
 		}
 	]
 }
