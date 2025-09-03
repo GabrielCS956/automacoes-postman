@@ -19,7 +19,7 @@
 									"let jsonData = pm.response.json();\r",
 									"pm.test(\"Validar upload da imagem para cadastro do pet\", () => {\r",
 									"\r",
-									"    pm.expect(pm.response.code, 'status diferente de 200').to.eql(200);\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
 									"});\r",
 									""
 								],
@@ -30,8 +30,12 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"packages": {},
-								"type": "text/javascript"
+								"id": "fdaf8540-70b6-4c0a-b412-3c8b3561e946",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
