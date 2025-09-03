@@ -29,7 +29,7 @@ jobs:
       # Step 3: Executa a coleção do Postman
       - name: Execute Postman Collection
         run: |
-          newman run .postman/collections/46757820-32ab63d3-1e2a-4c3f-bf47-52616cde4ee7.json \
+          newman run postman/collections/46757820-32ab63d3-1e2a-4c3f-bf47-52616cde4ee7.json \
             -e ./Petstore.Homologação.json \
             --reporters cli,htmlextra \
             --reporter-htmlextra-export ./results/Report.html
