@@ -1063,6 +1063,21 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "653ecfe4-3a86-44e8-975d-671734e077ee",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar busca de um pedido\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"id": "46757820-7ff70964-b9f3-49ed-b622-eec69b95f432",
