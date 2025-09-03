@@ -893,7 +893,6 @@
 									"    pm.environment.set(\"currentDate\", shipDate);\r",
 									"    console.log(\"Data de envio gerada e salva:\", shipDate);\r",
 									"\r",
-									"\r",
 									"});"
 								],
 								"type": "text/javascript",
