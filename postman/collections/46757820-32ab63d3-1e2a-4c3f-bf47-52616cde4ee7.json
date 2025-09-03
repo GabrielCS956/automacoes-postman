@@ -648,10 +648,26 @@
 					"name": "Delete a pet",
 					"event": [
 						{
+							"listen": "test",
+							"script": {
+								"id": "fdd04672-bd9e-4c74-b815-5198afc2cf50",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar exclusão do cadastro de um pet\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
 							"listen": "prerequest",
 							"script": {
-								"id": "57222944-1cbd-4992-94e9-67ef89df0e0b",
+								"id": "d900e158-344d-41f8-994a-d23b9292a640",
 								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
 									"pm.sendRequest({\r",
 									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
 									"    method: 'GET',\r",
@@ -665,45 +681,20 @@
 									"    }\r",
 									"\r",
 									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
 									"\r",
-									"    // Filtra pets válidos (com ID e nome definidos)\r",
-									"    const validPets = pets.filter(pet => pet.id !== undefined && pet.name);\r",
-									"\r",
-									"    if (validPets.length === 0) {\r",
-									"        console.error(\"Nenhum pet válido encontrado. Parando execução.\");\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
 									"        return;\r",
 									"    }\r",
 									"\r",
-									"    // Seleciona aleatoriamente um pet da lista filtrada\r",
-									"    const randomPet = validPets[Math.floor(Math.random() * validPets.length)];\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.environment.set(\"IDPetDlt\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
 									"\r",
-									"    pm.variables.set(\"IDPetDlt\", randomPet.id);\r",
-									"\r",
-									"\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "83eb3883-9c90-4d0f-a12a-f2b6ba3f64ef",
-								"exec": [
-									"\r",
-									"let jsonData = pm.response.json();\r",
-									"    pm.test(\"Registro do pet excluído com sucesso\", () => {\r",
-									"\r",
-									"   if(pm.response.code === 200){\r",
-									"    pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
-									"    pm.response.to.have.status(200);\r",
-									"   }\r",
-									"   else{\r",
-									"     pm.expect.fail(JSON.stringify(jsonData) + \" RETURN STATUS CODE : \" + pm.response.code)\r",
-									"   }\r",
-									"})"
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
