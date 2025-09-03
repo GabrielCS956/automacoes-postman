@@ -841,7 +841,7 @@
 								"id": "d14a5343-8036-403c-ba52-fe5268df7309",
 								"exec": [
 									"let jsonData = pm.response.json();\r",
-									"pm.test(\"Validar atualização do nome e status do pet\", () => {\r",
+									"pm.test(\"Validar criação de um pedido\", () => {\r",
 									"\r",
 									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
 									"});\r",
@@ -852,7 +852,7 @@
 									"    const today = new Date().toISOString().split('T')[0];\r",
 									"    const responseDatePart = responseShipDate.split('T')[0];\r",
 									"\r",
-									"    pm.expect(responseDatePart).to.eql(today);\r",
+									"    pm.expect(responseDatePart, 'Não retornou a data atual').to.eql(today);\r",
 									"});"
 								],
 								"type": "text/javascript",
