@@ -744,20 +744,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "25e2c3c8-4988-4797-82b2-79da665b5c02",
+								"id": "1583e6ac-f607-42a9-95f8-6c051685a653",
 								"exec": [
 									"let jsonData = pm.response.json();\r",
-									"pm.test(\"Lista de pedidos encontrada\", () => {\r",
+									"pm.test(\"Validar lista de pedidos\", () => {\r",
 									"\r",
-									"   if(pm.response.code === 200){\r",
-									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
-									"     pm.expect(jsonData.code, \"Sem sucesso\").to.eql(200);\r",
-									"   }\r",
-									"   else{\r",
-									"     pm.expect.fail(JSON.stringify(jsonData) + \" RETURN STATUS CODE : \" + pm.response.code)\r",
-									"   }\r",
-									"})\r",
-									""
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
