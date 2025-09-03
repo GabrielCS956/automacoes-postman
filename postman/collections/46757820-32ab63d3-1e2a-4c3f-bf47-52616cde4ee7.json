@@ -1529,6 +1529,21 @@
 								"type": "text/javascript",
 								"packages": {}
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e8f5a307-67fe-427d-bd01-c3a3dbe9d31a",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar busca de usuário por userName\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
 						}
 					],
 					"id": "46757820-0dd6792a-9fe2-4ab3-8f70-13dd93905074",
