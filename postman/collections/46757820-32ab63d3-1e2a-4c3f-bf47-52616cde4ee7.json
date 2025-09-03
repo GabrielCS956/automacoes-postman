@@ -1253,38 +1253,6 @@
 			"name": "User - Operations about user",
 			"item": [
 				{
-					"name": "https://petstore.swagger.io/v2/user/aaaaa",
-					"id": "46757820-0dd6792a-9fe2-4ab3-8f70-13dd93905074",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "accept",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "https://petstore.swagger.io/v2/user/aaaaa",
-							"protocol": "https",
-							"host": [
-								"petstore",
-								"swagger",
-								"io"
-							],
-							"path": [
-								"v2",
-								"user",
-								"aaaaa"
-							]
-						},
-						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/aaaaa' \\\r\n  -H 'accept: application/json'"
-					},
-					"response": []
-				},
-				{
 					"name": "Create list of users with given input array",
 					"event": [
 						{
@@ -1430,6 +1398,38 @@
 							]
 						},
 						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/user/createWithList' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]'"
+					},
+					"response": []
+				},
+				{
+					"name": "https://petstore.swagger.io/v2/user/aaaaa",
+					"id": "46757820-0dd6792a-9fe2-4ab3-8f70-13dd93905074",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/user/aaaaa",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"user",
+								"aaaaa"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/aaaaa' \\\r\n  -H 'accept: application/json'"
 					},
 					"response": []
 				}
