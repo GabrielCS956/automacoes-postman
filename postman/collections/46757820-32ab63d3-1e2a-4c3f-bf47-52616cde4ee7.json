@@ -491,7 +491,7 @@
 									"    }\r",
 									"\r",
 									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
-									"    pm.variables.set(\"IDPetupd\", randomId);\r",
+									"    pm.variables.set(\"IDPet\", randomId);\r",
 									"    console.log(\"IDPet selecionado:\", randomId);\r",
 									"\r",
 									"});"
@@ -518,14 +518,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/v2/pet/aaadsadsdasd",
+							"raw": "{{baseURL}}/v2/pet/{{IDPet}}",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"v2",
 								"pet",
-								"aaadsadsdasd"
+								"{{IDPet}}"
 							]
 						},
 						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/pet/456465' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
