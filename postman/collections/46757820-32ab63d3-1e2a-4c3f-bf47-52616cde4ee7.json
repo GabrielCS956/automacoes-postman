@@ -970,7 +970,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": 0,\n  \"petId\": {{IDPetOrder}},\n  \"quantity\": 2,\n  \"shipDate\": \"{{currentDate}}\",\n  \"status\": \"placed\",\n  \"complete\": true\n}\n\n",
+							"raw": "{\n  \"id\": \"\",\n  \"petId\": {{IDPetOrder}},\n  \"quantity\": 2,\n  \"shipDate\": \"{{currentDate}}\",\n  \"status\": \"placed\",\n  \"complete\": true\n}\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
