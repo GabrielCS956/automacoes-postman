@@ -990,6 +990,81 @@
 				},
 				{
 					"name": "Find purchase order by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a6d8671c-dffb-43df-8762-b2e57171c293",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Obtém a data e hora atual (no formato ISO 8601) \r",
+									"    const dataAtual = new Date();\r",
+									"    const shipDate = dataAtual.toISOString();\r",
+									"    pm.environment.set(\"currentDate\", shipDate);\r",
+									"    console.log(\"Data de envio gerada e salva:\", shipDate);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"//Realiza outra requisição para realizar um pedido e obter o ID dele\r",
+									"\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/store/order`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"id\": 0,\r",
+									"            \"petId\": pm.environment.get(\"IDPetOrder\"),\r",
+									"            \"quantity\": 2,\r",
+									"            \"shipDate\": pm.environment.get(\"currentDate\"),\r",
+									"            \"status\": \"placed\",\r",
+									"            \"complete\": true\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o pedido:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do pedido.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const orderId = res.json().id;\r",
+									"    pm.environment.set(\"IDOrderFind\", orderId);\r",
+									"    console.log(\"Pedido criado. ID do pedido salvo:\", orderId);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"id": "46757820-7ff70964-b9f3-49ed-b622-eec69b95f432",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1003,18 +1078,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://petstore.swagger.io/v2/store/order/5",
-							"protocol": "https",
+							"raw": "{{baseURL}}/v2/store/order/{{IDOrderFind}}",
 							"host": [
-								"petstore",
-								"swagger",
-								"io"
+								"{{baseURL}}"
 							],
 							"path": [
 								"v2",
 								"store",
 								"order",
-								"5"
+								"{{IDOrderFind}}"
 							]
 						},
 						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/store/order/5' \\\r\n  -H 'accept: application/json'"
