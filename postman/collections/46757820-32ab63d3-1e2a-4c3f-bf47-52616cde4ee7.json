@@ -1402,7 +1402,7 @@
 					"response": []
 				},
 				{
-					"name": "https://petstore.swagger.io/v2/user/aaaaa",
+					"name": "Get user by user name",
 					"id": "46757820-0dd6792a-9fe2-4ab3-8f70-13dd93905074",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
