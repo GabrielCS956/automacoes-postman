@@ -1254,6 +1254,113 @@
 			"item": [
 				{
 					"name": "Create list of users with given input array",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "251e5bb3-d08c-4dce-acf6-c341359263e5",
+								"exec": [
+									"// Faz a requisição para o 4Devs para gerar uma pessoa\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    // Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"    // 1. Separar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"    // 2. Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Gera um número de 1000 a 9999\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"    // 3. Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"    // 4. Salvar as variáveis de ambiente ou de coleção para a requisição principal usar\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"    // Logs para visualização no Console do Postman\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"---\");\r",
+									"    console.log(\"Dados formatados para a API:\");\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1e656497-8ed6-47ad-a22c-2b729cdf9def",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar criação de usuário\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"id": "46757820-046864fe-35c7-4c2b-8d8f-88579b553afd",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1272,7 +1379,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+							"raw": "[\r\n    {\r\n        \"id\": 0,\r\n        \"username\": \"{{username}}\",\r\n        \"firstName\": \"{{firstName}}\",\r\n        \"lastName\": \"{{lastName}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"password\": \"{{password}}\",\r\n        \"phone\": \"{{phone}}\",\r\n        \"userStatus\": 0\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
