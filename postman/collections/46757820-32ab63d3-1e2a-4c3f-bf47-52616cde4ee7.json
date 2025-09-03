@@ -448,10 +448,26 @@
 					"name": "Find pet by ID",
 					"event": [
 						{
+							"listen": "test",
+							"script": {
+								"id": "f263e116-5a06-4215-baec-8ea8f5d2559c",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar busca de um pet pelo ID\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
 							"listen": "prerequest",
 							"script": {
-								"id": "51bd3042-01a3-4c90-bff6-e2ce972df9a9",
+								"id": "e751324a-4e78-4ec7-bf44-c3717f39b43f",
 								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
 									"pm.sendRequest({\r",
 									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
 									"    method: 'GET',\r",
@@ -459,13 +475,8 @@
 									"        'Content-Type': 'application/json'\r",
 									"    }\r",
 									"}, function (err, res) {\r",
-									"    if (err) {\r",
-									"        console.error(\"Erro ao buscar pets por status:\", err);\r",
-									"        return;\r",
-									"    }\r",
-									"\r",
-									"    if (res.code !== 200) {\r",
-									"        console.error(\"Erro na resposta da API. Código de status:\", res.code);\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
 									"        return;\r",
 									"    }\r",
 									"\r",
@@ -475,37 +486,15 @@
 									"        .map(pet => pet.id);\r",
 									"\r",
 									"    if (ids.length === 0) {\r",
-									"        console.error(\"Nenhum pet com ID encontrado. Verifique se a API retornou dados válidos.\");\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
 									"        return;\r",
 									"    }\r",
 									"\r",
 									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
-									"    pm.environment.set(\"IDPet\", randomId);\r",
-									"    console.log(\"IDPet selecionado e salvo na variável de ambiente:\", randomId);\r",
+									"    pm.variables.set(\"IDPetupd\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
 									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "ed0b89d5-49c4-4938-9ed0-afe8a3d0be2c",
-								"exec": [
-									"pm.test(\"Validar busca de pet por ID\", () => {\r",
-									"\r",
-									"   if(pm.response.code === 200){\r",
-									"     const jsonData = pm.response.json();\r",
-									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
-									"    pm.response.to.have.status(200);\r",
-									"\r",
-									"   }\r",
-									"   else{\r",
-									"     pm.expect.fail(JSON.stringify(jsonData) + \" RETURN STATUS CODE : \" + pm.response.code)\r",
-									"   }\r",
-									"})\r",
-									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -529,14 +518,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseURL}}/v2/pet/{{IDPet}}",
+							"raw": "{{baseURL}}/v2/pet/aaadsadsdasd",
 							"host": [
 								"{{baseURL}}"
 							],
 							"path": [
 								"v2",
 								"pet",
-								"{{IDPet}}"
+								"aaadsadsdasd"
 							]
 						},
 						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/pet/456465' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
