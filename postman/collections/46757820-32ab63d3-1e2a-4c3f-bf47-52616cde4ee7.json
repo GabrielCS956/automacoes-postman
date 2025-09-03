@@ -1121,6 +1121,103 @@
 				},
 				{
 					"name": "Delete purchase order by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7fbb1d62-2584-4aa3-8311-4e9b3583d045",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.collectionVariables.set(\"IDPetOrder2\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"// Obtém a data e hora atual (no formato ISO 8601) \r",
+									"    const dataAtual = new Date();\r",
+									"    const shipDate = dataAtual.toISOString();\r",
+									"    pm.collectionVariables.set(\"currentDate\", shipDate);\r",
+									"    console.log(\"Data de envio gerada e salva:\", shipDate);\r",
+									"});\r",
+									"// Gera um ID aleatório para o pedido\r",
+									"const randomOrderId = Math.floor(Math.random() * 10000) + 1;\r",
+									"pm.collectionVariables.set(\"randomOrderId\", randomOrderId);\r",
+									"console.log(\"ID do pedido aleatório gerado:\", randomOrderId);\r",
+									"\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/store/order`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"id\": pm.collectionVariables.get(\"randomOrderId\"),\r",
+									"            \"petId\": pm.collectionVariables.get(\"IDPetOrder2\"),\r",
+									"            \"quantity\": 2,\r",
+									"            \"shipDate\": pm.collectionVariables.get(\"currentDate\"),\r",
+									"            \"status\": \"placed\",\r",
+									"            \"complete\": true\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o pedido:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do pedido.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const orderId = res.json().id;\r",
+									"    pm.collectionVariables.set(\"IDOrderDel\", orderId);\r",
+									"    console.log(\"Pedido criado. ID do pedido salvo:\", orderId);\r",
+									"    });\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "39fe3601-76e8-49f0-a9e4-cdbba7c27acd",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar exclusão de um pedido\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"id": "46757820-41d3940a-cfa8-4dd4-8ebd-f6577ccf0fea",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -1134,18 +1231,15 @@
 							}
 						],
 						"url": {
-							"raw": "https://petstore.swagger.io/v2/store/order/5",
-							"protocol": "https",
+							"raw": "{{baseURL}}/v2/store/order/{{IDOrderDel}}",
 							"host": [
-								"petstore",
-								"swagger",
-								"io"
+								"{{baseURL}}"
 							],
 							"path": [
 								"v2",
 								"store",
 								"order",
-								"5"
+								"{{IDOrderDel}}"
 							]
 						},
 						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/store/order/5' \\\r\n  -H 'accept: application/json'"
