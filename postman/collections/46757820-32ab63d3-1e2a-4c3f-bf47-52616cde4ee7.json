@@ -219,20 +219,13 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f8cd8535-df5f-4700-85cf-fd58858a579e",
+								"id": "e0b3a224-796f-45f7-8c4a-f9f2e819c32d",
 								"exec": [
 									"let jsonData = pm.response.json();\r",
-									"pm.test(\"Lista de pets encontrada\", () => {\r",
+									"pm.test(\"Validar lista de pets por status\", () => {\r",
 									"\r",
-									"   if(pm.response.code === 200){\r",
-									"     pm.expect(jsonData, \"Valor vazio\").to.exist;\r",
-									"      pm.response.to.have.status(200);\r",
-									"\r",
-									"   }\r",
-									"   else{\r",
-									"     pm.expect.fail(JSON.stringify(jsonData) + \" RETURN STATUS CODE : \" + pm.response.code)\r",
-									"   }\r",
-									"})\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript",
@@ -242,7 +235,7 @@
 						{
 							"listen": "prerequest",
 							"script": {
-								"id": "b24bb388-bc78-42d6-b6a2-39438f20385a",
+								"id": "15bef8d1-955c-4e64-9aaf-9b7ad2b43f7e",
 								"exec": [
 									""
 								],
