@@ -1560,6 +1560,51 @@
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
+		},
+		{
+			"name": "https://petstore.swagger.io/v2/user/marliribeiromarli4948",
+			"id": "46757820-3672d16c-ad68-4497-b7e2-a2fc2709fa32",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9223372036854755121,\r\n    \"username\": \"marliribeiromarli4948\",\r\n    \"firstName\": \"Marli\",\r\n    \"lastName\": \"Marli Ribeiro\",\r\n    \"email\": \"marli_marli_ribeiro@gtx.ag\",\r\n    \"password\": \"ysuKyHfa\",\r\n    \"phone\": \"98984391789\",\r\n    \"userStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/marliribeiromarli4948",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"marliribeiromarli4948"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://petstore.swagger.io/v2/user/marliribeiromarli4948' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"id\": 9223372036854755121,\r\n    \"username\": \"marliribeiromarli4948\",\r\n    \"firstName\": \"Marli\",\r\n    \"lastName\": \"Marli Ribeiro\",\r\n    \"email\": \"marli_marli_ribeiro@gtx.ag\",\r\n    \"password\": \"ysuKyHfa\",\r\n    \"phone\": \"98984391789\",\r\n    \"userStatus\": 1\r\n}'"
+			},
+			"response": []
 		}
 	],
 	"event": [
