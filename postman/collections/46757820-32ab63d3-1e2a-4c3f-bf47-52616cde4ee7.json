@@ -1695,8 +1695,23 @@
 									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
 									"pm.collectionVariables.set(\"usernameToUpdate\", createdUsername);\r",
 									"\r",
-									"console.log(\"Username salvo para busca:\", pm.collectionVariables.get(\"usernameToSearch\"));\r",
+									"console.log(\"Username salvo para busca:\", pm.collectionVariables.get(\"usernameToUpdate\"));\r",
 									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d7bd9dc-df1d-43cb-aa39-37ab8704aaca",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar atualização de um usuário\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
 								],
 								"type": "text/javascript",
 								"packages": {}
