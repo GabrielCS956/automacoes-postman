@@ -2128,7 +2128,7 @@
 					"response": []
 				},
 				{
-					"name": "https://petstore.swagger.io/v2/user/logout",
+					"name": "Logs out current logged in user session",
 					"id": "46757820-b872e2ca-37d0-4ddf-a05a-0df1c30fe943",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
