@@ -1253,7 +1253,7 @@
 			"name": "User - Operations about user",
 			"item": [
 				{
-					"name": "Create list of users with given input array Copy",
+					"name": "Create list of users with given input array",
 					"event": [
 						{
 							"listen": "prerequest",
