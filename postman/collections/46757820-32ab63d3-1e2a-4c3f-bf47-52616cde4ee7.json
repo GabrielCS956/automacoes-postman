@@ -1574,6 +1574,38 @@
 					"response": []
 				},
 				{
+					"name": "Delete user",
+					"id": "46757820-76af5513-0f12-45e3-a825-9717fe0ca515",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/user/sdfsdf",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"user",
+								"sdfsdf"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/user/sdfsdf' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
 					"name": "Updated user",
 					"event": [
 						{
@@ -1745,38 +1777,6 @@
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
-		},
-		{
-			"name": "https://petstore.swagger.io/v2/user/sdfsdf",
-			"id": "46757820-76af5513-0f12-45e3-a825-9717fe0ca515",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "https://petstore.swagger.io/v2/user/sdfsdf",
-					"protocol": "https",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"user",
-						"sdfsdf"
-					]
-				},
-				"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/user/sdfsdf' \\\r\n  -H 'accept: application/json'"
-			},
-			"response": []
 		}
 	],
 	"event": [
