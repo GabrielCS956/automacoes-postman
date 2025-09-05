@@ -1938,6 +1938,48 @@
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
+		},
+		{
+			"name": "https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd",
+			"id": "46757820-458e7b45-6317-40d6-af5b-78f977825e9b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "asdasdasd"
+						},
+						{
+							"key": "password",
+							"value": "asdasdasd"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
 		}
 	],
 	"event": [
