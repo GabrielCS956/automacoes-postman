@@ -2171,6 +2171,14 @@
 		{
 			"key": "usernameToDelete",
 			"value": ""
+		},
+		{
+			"key": "usernameToLogin",
+			"value": ""
+		},
+		{
+			"key": "passwordToLogin",
+			"value": ""
 		}
 	]
 }
