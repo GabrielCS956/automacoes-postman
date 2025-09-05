@@ -1940,7 +1940,7 @@
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
 		},
 		{
-			"name": "https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd",
+			"name": "Logs user into the system",
 			"id": "46757820-458e7b45-6317-40d6-af5b-78f977825e9b",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
