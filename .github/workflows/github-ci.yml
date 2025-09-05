@@ -1,10 +1,13 @@
-name: PetStore
+name: Pet Store
 
 on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: https://petstore.swagger.io  # Define a variável de ambiente para Newman
 
     steps:
       - name: Checkout repository
@@ -21,18 +24,17 @@ jobs:
       - name: Run Postman tests
         run: |
           newman run postman/collections/46757820-32ab63d3-1e2a-4c3f-bf47-52616cde4ee7.json \
+          --env-var "baseURL=$BASE_URL" \
           -r cli,htmlextra,junit \
           --reporter-htmlextra-export report.html \
           --reporter-junit-export results.xml
 
-      # Publica o relatório HTML como artefato (baixável nos detalhes do job)
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
         with:
           name: newman-report
           path: report.html
 
-      # Publica um board de aprovados/reprovados no próprio Actions/PR
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: always()
