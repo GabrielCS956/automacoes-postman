@@ -8,10 +8,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
@@ -25,14 +25,14 @@ jobs:
           --reporter-htmlextra-export report.html \
           --reporter-junit-export results.xml
 
-      # Publica o relatório HTML como artefato
+      # Publica o relatório HTML como artefato (baixável nos detalhes do job)
       - name: Upload HTML report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: newman-report
           path: report.html
 
-      # Publica os resultados no "Checks" do GitHub (aparece na aba PR/Commits)
+      # Publica um board de aprovados/reprovados no próprio Actions/PR
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: always()
