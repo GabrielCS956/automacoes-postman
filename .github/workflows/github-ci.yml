@@ -1,42 +1,40 @@
-name: PetStore
+name: API Tests
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 0: Checkout do código
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 1: Verifica versões
-      - name: Check version Newman and Node
-        run: |
-          newman --version
-          node --version
-          
-      # Step 2: Instala o reporter HTML extra
-      - name: Install Newman-Reporter-Htmlextra
-        run: sudo npm install -g newman-reporter-htmlextra
-        
-      # Step 3: Executa a coleção do Postman
-      - name: Execute Postman Collection
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Newman
+        run: npm install -g newman newman-reporter-htmlextra
+
+      - name: Run Postman tests
         run: |
           newman run postman/collections/46757820-32ab63d3-1e2a-4c3f-bf47-52616cde4ee7.json \
-            -e ./Petstore.Homologação.json \
-            --reporters cli,htmlextra \
-            --reporter-htmlextra-export ./results/Report.html
-   
-      # Step 4: Faz upload do relatório gerado
-      - name: Archive HTML report
-        uses: actions/upload-artifact@v4
+          -r cli,htmlextra,junit \
+          --reporter-htmlextra-export report.html \
+          --reporter-junit-export results.xml
+
+      # Publica o relatório HTML como artefato
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v3
         with:
-          name: Relatorio-Newman
-          path: ./results/Report.html
+          name: newman-report
+          path: report.html
+
+      # Publica os resultados no "Checks" do GitHub (aparece na aba PR/Commits)
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always()
+        with:
+          report_paths: results.xml
