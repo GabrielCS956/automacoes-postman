@@ -1,0 +1,2617 @@
+{
+	"info": {
+		"_postman_id": "46757820-32ab63d3-1e2a-4c3f-bf47-52616cde4ee7",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pet - Everything about your Pets",
+			"item": [
+				{
+					"name": "Uploads an image",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "059f2df9-bf36-46d4-ba85-79455a591962",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar upload da imagem para cadastro do pet\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fdaf8540-70b6-4c0a-b412-3c8b3561e946",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-de9da45f-5888-4c0b-b83f-d9a7866bf875",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"type": "file",
+									"contentType": "image/png",
+									"key": "file",
+									"src": "/C:/Users/gabri/Downloads/3047928.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{IDPet}}/uploadImage",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{IDPet}}",
+								"uploadImage"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/pet/55/uploadImage' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: multipart/form-data' \\\r\n  -F 'file=@3047928.png;type=image/png'"
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new pet to the store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "409fdab7-fa5c-407d-afd0-16f229d921a0",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar criação de um novo pet\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2f1f9e12-51f9-4f73-9450-312b5f293baa",
+								"exec": [
+									"// Array com os nomes de pets\r",
+									"const petNames = [\r",
+									"  \"Buddy\",\"Luna\",\"Max\",\"Bella\",\"Charlie\",\"Daisy\",\"Leo\",\"Molly\",\"Rocky\",\"Sophie\",\"Apollo\",\"Cleo\",\"Jasper\",\"Ruby\",\"Sam\",\"Willow\",\"Zoe\",\"Oscar\",\"Thor\",\"Mel\",\"Simba\",\"Nala\",\"Freud\",\"Puff\",\"Bidu\",\"Luke\",\"Mia\",\"Kiko\",\"Oliver\",\"Rex\",\"Amora\",\"Sushi\",\"Pirata\",\"Princesa\",\"Duque\",\"Lady\",\"Zeus\",\"Athena\",\"Cookie\",\"Wifi\",\"Zuzu\",\"Tatá\",\"Nani\",\"Neném\",\"Fran\",\"Fafá\",\"Dengo\",\"Baby\",\"Zizi\",\"Buba\",\"Bica\",\"Bibi\",\"Bebê\",\"Cuca\",\"Didi\",\"Dedé\",\"Fabi\",\"Fifi\",\"Fofi\",\"Gui\",\"Ju\",\"Juju\",\"Kimba\",\"Kiki\",\"Kira\",\"Kaki\",\"Kuki\",\"Luka\",\"Lula\",\"Lu\",\"Mamona\",\"Mancha\",\"Mimi\",\"Nani\",\"Nuca\",\"Pinta\",\"Pipa\",\"Pupi\",\"Pita\",\"Sapeca\",\"Titi\",\"Vavá\",\"Lupi\",\"Juca\",\"Pepe\",\"Joca\",\"Balu\",\"Cadu\",\"Guga\",\"Tutti\",\"Caca\",\"Ti\",\"Auau\",\"Xodó\",\"Duda\",\"Jojo\",\"Indy\",\"Jackie\",\"Jim\",\"Joy\",\"Kim\",\"Kora\",\"Kali\",\"Kia\",\"Leslie\",\"Misha\",\"Maya\",\"Noah\",\"Randy\",\"Sugar\",\"Sweet\",\"Angel\",\"Funny\",\"Harley\",\"Theo\",\"Max\",\"Snow\",\"Tony\",\"Jack\",\"Zac\",\"Willy\",\"Doki\",\"Fox\",\"Louis\",\"Blue\",\"Nicky\",\"Holly\",\"Izzy\",\"Jake\",\"Koda\",\"Lee\",\"Murphy\",\"Liam\",\"Sammy\",\"Simon\",\"Willow\",\"Yang\",\"Alex\",\"Taylor\",\"Charlie\",\"Quinn\",\"Alexis\",\"Cameron\",\"Jules\"\r",
+									"];\r",
+									"\r",
+									"// Array com as categorias de pets\r",
+									"const animalCategories = [\r",
+									"\"Cachorro Golden Retriever\",\"Cachorro Labrador Retriever\",\"Cachorro Pastor Alemão\",\"Cachorro Shih Tzu\",\"Cachorro Yorkshire Terrier\",\"Cachorro Poodle\",\"Cachorro Pug\",\"Cachorro Bulldog Francês\",\"Cachorro Border Collie\",\"Cachorro Husky Siberiano\",\"Gato Persa\",\"Gato Siamês\",\"Gato Maine Coon\",\"Gato Ragdoll\",\"Gato Sphynx\",\"Gato Angorá\",\"Gato Bengal\",\"Gato British Shorthair\",\"Peixe Betta\",\"Peixe Kinguio\",\"Peixe Neon Tetra\",\"Peixe Guppy\",\"Peixe Acará-Bandeira\",\"Coelho Mini Lop\",\"Coelho Holland Lop\",\"Coelho Cabeça de Leão\",\"Coelho Gigante de Flandres\",\"Coelho Rex\",\"Hamster Sírio\",\"Hamster Anão Russo\",\"Hamster Roborovski\",\"Hamster Chinês\",\"Pássaro Periquito\",\"Pássaro Canário\",\"Pássaro Calopsita\",\"Pássaro Agapornis\",\"Pássaro Diamante Mandarim\",\"Cachorro Boxer\",\"Cachorro Dachshund\",\"Cachorro Chihuahua\",\"Cachorro Rottweiler\",\"Cachorro Doberman Pinscher\",\"Cachorro Beagle\",\"Cachorro Buldogue Inglês\",\"Cachorro Boston Terrier\",\"Cachorro Basset Hound\",\"Cachorro São Bernardo\",\"Gato Abissínio\",\"Gato American Shorthair\",\"Gato Oriental Shorthair\",\"Gato Siberiano\",\"Gato Azul Russo\",\"Gato Somali\",\"Gato Birmanês\",\"Gato Devon Rex\",\"Peixe Molly\",\"Peixe Espada\",\"Peixe Platy\",\"Peixe Corydora\",\"Peixe Oscar\",\"Peixe Cascudo\",\"Coelho Angorá\",\"Coelho Hotot\",\"Coelho Californiano\",\"Coelho Mini Rex\",\"Porquinho-da-Índia Abissínio\",\"Porquinho-da-Índia Americano\",\"Porquinho-da-Índia Peruano\",\"Pássaro Cacatua\",\"Pássaro Papagaio\",\"Pássaro Mainá\",\"Pássaro Zebra Finch\",\"Pássaro Coleiro\"\r",
+									"];\r",
+									"\r",
+									"// Array com as tags\r",
+									"const customTags = [\r",
+									"   \"Vacinado\",\"Adotado\",\"Brincalhão\",\"Calmo\",\"Treinado\",\"Dócil\",\"Pelagem Longa\",\"Filhote\",\"Adulto\",\"Castrado\",\"Doméstico\",\"Exótico\",\"De Grande Porte\",\"De Pequeno Porte\",\"Obediente\",\"Independente\",\"Protetor\",\"Energético\",\"Preguiçoso\",\"Fofo\",\"Barulhento\",\"Silencioso\",\"Curioso\",\"Sociável\",\"Antissocial\",\"Destruidor\",\"Comilão\",\"Inteligente\",\"Leal\",\"Corajoso\",\"Tímido\",\"Agitável\",\"Apegado\",\"Brando\",\"Teimoso\",\"Engraçado\",\"Cheiroso\",\"Esperto\",\"Limpo\",\"Bagunceiro\",\"Carente\",\"Ativo\",\"Pelo Curto\",\"Pelo Médio\",\"Olhos Azuis\",\"Olhos Verdes\",\"Orelhas Pontudas\",\"Orelhas Caídas\",\"Cauda Longa\",\"Cauda Curta\",\"Pescoço Longo\",\"Patas Curtas\",\"Amigável com crianças\",\"Amigável com outros pets\",\"Gosta de água\",\"Não gosta de água\",\"Treinável\",\"Requer cuidados especiais\",\"Vocal\",\"Saltador\",\"Escavador\",\"Nadador\",\"Terrestre\",\"Arbóreo\",\"Noturno\",\"Diurno\",\"Mestiço\",\"Puro-sangue\",\"Resgatado\",\"Alergênico\",\"Hipoalergênico\",\"Grande apetite\",\"Pequeno apetite\",\"Gosta de colo\",\"Gosta de passear\"\r",
+									"];\r",
+									"\r",
+									"// Função para obter um item aleatório de um dos arrays\r",
+									"function getRandomItem(arr) {\r",
+									"    return arr[Math.floor(Math.random() * arr.length)];\r",
+									"}\r",
+									"// Função para gerar um ID aleatório de 4 dígitos\r",
+									"/* Explicação da lógica\r",
+									"\"Math.random()\": Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusivo);\r",
+									"\r",
+									"\"* 9000\": Multiplicando por 9000, você obtém um número decimal entre 0 e 8999;\r",
+									"\r",
+									"\"+ 1000\": Adicionando 1000, o intervalo se move para entre 1000 e 9999;\r",
+									"\r",
+									"\"Math.floor()\": Arredonda o número para o inteiro mais próximo, garantindo que você tenha um número sem casas decimais dentro do intervalo de 4 dígitos.\r",
+									"*/\r",
+									"function generateFourDigitId() {\r",
+									"    return Math.floor(1000 + Math.random() * 9000); \r",
+									"}\r",
+									"\r",
+									"// Gera dois nomes aleatórios e os une para criar um nome de pet mais variado\r",
+									"const part1OfName = getRandomItem(petNames);\r",
+									"let part2OfName = getRandomItem(petNames);\r",
+									"// Garante que o segundo nome seja diferente do primeiro para evitar repetição\r",
+									"while (part2OfName === part1OfName) {\r",
+									"    part2OfName = getRandomItem(petNames);\r",
+									"}\r",
+									"// Junção dos dois nomes\r",
+									"const randomPetName = `${part1OfName} ${part2OfName}`; \r",
+									"\r",
+									"// Seleciona uma categoria do array\r",
+									"const randomCategoryName = getRandomItem(animalCategories); \r",
+									"// Seleciona uma tag do array\r",
+									"const randomCustomTag = getRandomItem(customTags);\r",
+									"\r",
+									"// Geração de IDs de 4 dígitos\r",
+									"const petId = generateFourDigitId();\r",
+									"const categoryId = generateFourDigitId();\r",
+									"const tagId = generateFourDigitId();\r",
+									"const customTagId = generateFourDigitId();\r",
+									"\r",
+									"// Variáveis\r",
+									"pm.collectionVariables.set(\"part1OfName\", part1OfName);\r",
+									"pm.collectionVariables.set(\"part2OfName\", part2OfName);\r",
+									"pm.collectionVariables.set(\"petName\", randomPetName);\r",
+									"pm.collectionVariables.set(\"petCategoryName\", randomCategoryName);\r",
+									"pm.collectionVariables.set(\"petId\", petId);\r",
+									"pm.collectionVariables.set(\"petCategoryId\", categoryId);\r",
+									"pm.collectionVariables.set(\"petTagId\", tagId);\r",
+									"pm.collectionVariables.set(\"petCustomTag\", randomCustomTag);\r",
+									"pm.collectionVariables.set(\"petCustomTagId\", customTagId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-eb9d9a97-046e-42d6-bf28-b7da51d9bd62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{petId}},\r\n  \"category\": {\r\n    \"id\": {{petCategoryId}},\r\n    \"name\": \"{{petCategoryName}}\"\r\n  },\r\n  \"name\": \"{{petName}}\",\r\n  \"photoUrls\": [\r\n    \"https://example.com/photos/{{part2OfName}}_{{part1OfName}}.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": {{petTagId}},\r\n      \"name\": \"{{petCustomTag}}\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/pet' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Find pet by status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e0b3a224-796f-45f7-8c4a-f9f2e819c32d",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar lista de pets por status\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "15bef8d1-955c-4e64-9aaf-9b7ad2b43f7e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-24b8d1de-4c12-4316-860a-34555c70a3bf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/findByStatus?status=avaliable,pending,sold",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "avaliable,pending,sold"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/pet/findByStatus?status=pending' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Update an existing pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "44379139-5891-4047-8015-8bfbeae8ce08",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar atualização de um pet\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "532ba69d-c78c-4576-a317-a0ea6396d7b2",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.error(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.variables.set(\"IDPetupd\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"// Array com os nomes de pets\r",
+									"const petNames = [\r",
+									"  \"Buddy\",\"Luna\",\"Max\",\"Bella\",\"Charlie\",\"Daisy\",\"Leo\",\"Molly\",\"Rocky\",\"Sophie\",\"Apollo\",\"Cleo\",\"Jasper\",\"Ruby\",\"Sam\",\"Willow\",\"Zoe\",\"Oscar\",\"Thor\",\"Mel\",\"Simba\",\"Nala\",\"Freud\",\"Puff\",\"Bidu\",\"Luke\",\"Mia\",\"Kiko\",\"Oliver\",\"Rex\",\"Amora\",\"Sushi\",\"Pirata\",\"Princesa\",\"Duque\",\"Lady\",\"Zeus\",\"Athena\",\"Cookie\",\"Wifi\",\"Zuzu\",\"Tatá\",\"Nani\",\"Neném\",\"Fran\",\"Fafá\",\"Dengo\",\"Baby\",\"Zizi\",\"Buba\",\"Bica\",\"Bibi\",\"Bebê\",\"Cuca\",\"Didi\",\"Dedé\",\"Fabi\",\"Fifi\",\"Fofi\",\"Gui\",\"Ju\",\"Juju\",\"Kimba\",\"Kiki\",\"Kira\",\"Kaki\",\"Kuki\",\"Luka\",\"Lula\",\"Lu\",\"Mamona\",\"Mancha\",\"Mimi\",\"Nani\",\"Nuca\",\"Pinta\",\"Pipa\",\"Pupi\",\"Pita\",\"Sapeca\",\"Titi\",\"Vavá\",\"Lupi\",\"Juca\",\"Pepe\",\"Joca\",\"Balu\",\"Cadu\",\"Guga\",\"Tutti\",\"Caca\",\"Ti\",\"Auau\",\"Xodó\",\"Duda\",\"Jojo\",\"Indy\",\"Jackie\",\"Jim\",\"Joy\",\"Kim\",\"Kora\",\"Kali\",\"Kia\",\"Leslie\",\"Misha\",\"Maya\",\"Noah\",\"Randy\",\"Sugar\",\"Sweet\",\"Angel\",\"Funny\",\"Harley\",\"Theo\",\"Max\",\"Snow\",\"Tony\",\"Jack\",\"Zac\",\"Willy\",\"Doki\",\"Fox\",\"Louis\",\"Blue\",\"Nicky\",\"Holly\",\"Izzy\",\"Jake\",\"Koda\",\"Lee\",\"Murphy\",\"Liam\",\"Sammy\",\"Simon\",\"Willow\",\"Yang\",\"Alex\",\"Taylor\",\"Charlie\",\"Quinn\",\"Alexis\",\"Cameron\",\"Jules\"\r",
+									"];\r",
+									"\r",
+									"// Array com as categorias de pets\r",
+									"const animalCategories = [\r",
+									"\"Cachorro Golden Retriever\",\"Cachorro Labrador Retriever\",\"Cachorro Pastor Alemão\",\"Cachorro Shih Tzu\",\"Cachorro Yorkshire Terrier\",\"Cachorro Poodle\",\"Cachorro Pug\",\"Cachorro Bulldog Francês\",\"Cachorro Border Collie\",\"Cachorro Husky Siberiano\",\"Gato Persa\",\"Gato Siamês\",\"Gato Maine Coon\",\"Gato Ragdoll\",\"Gato Sphynx\",\"Gato Angorá\",\"Gato Bengal\",\"Gato British Shorthair\",\"Peixe Betta\",\"Peixe Kinguio\",\"Peixe Neon Tetra\",\"Peixe Guppy\",\"Peixe Acará-Bandeira\",\"Coelho Mini Lop\",\"Coelho Holland Lop\",\"Coelho Cabeça de Leão\",\"Coelho Gigante de Flandres\",\"Coelho Rex\",\"Hamster Sírio\",\"Hamster Anão Russo\",\"Hamster Roborovski\",\"Hamster Chinês\",\"Pássaro Periquito\",\"Pássaro Canário\",\"Pássaro Calopsita\",\"Pássaro Agapornis\",\"Pássaro Diamante Mandarim\",\"Cachorro Boxer\",\"Cachorro Dachshund\",\"Cachorro Chihuahua\",\"Cachorro Rottweiler\",\"Cachorro Doberman Pinscher\",\"Cachorro Beagle\",\"Cachorro Buldogue Inglês\",\"Cachorro Boston Terrier\",\"Cachorro Basset Hound\",\"Cachorro São Bernardo\",\"Gato Abissínio\",\"Gato American Shorthair\",\"Gato Oriental Shorthair\",\"Gato Siberiano\",\"Gato Azul Russo\",\"Gato Somali\",\"Gato Birmanês\",\"Gato Devon Rex\",\"Peixe Molly\",\"Peixe Espada\",\"Peixe Platy\",\"Peixe Corydora\",\"Peixe Oscar\",\"Peixe Cascudo\",\"Coelho Angorá\",\"Coelho Hotot\",\"Coelho Californiano\",\"Coelho Mini Rex\",\"Porquinho-da-Índia Abissínio\",\"Porquinho-da-Índia Americano\",\"Porquinho-da-Índia Peruano\",\"Pássaro Cacatua\",\"Pássaro Papagaio\",\"Pássaro Mainá\",\"Pássaro Zebra Finch\",\"Pássaro Coleiro\"\r",
+									"];\r",
+									"\r",
+									"// Array com as tags\r",
+									"const customTags = [\r",
+									"   \"Vacinado\",\"Adotado\",\"Brincalhão\",\"Calmo\",\"Treinado\",\"Dócil\",\"Pelagem Longa\",\"Filhote\",\"Adulto\",\"Castrado\",\"Doméstico\",\"Exótico\",\"De Grande Porte\",\"De Pequeno Porte\",\"Obediente\",\"Independente\",\"Protetor\",\"Energético\",\"Preguiçoso\",\"Fofo\",\"Barulhento\",\"Silencioso\",\"Curioso\",\"Sociável\",\"Antissocial\",\"Destruidor\",\"Comilão\",\"Inteligente\",\"Leal\",\"Corajoso\",\"Tímido\",\"Agitável\",\"Apegado\",\"Brando\",\"Teimoso\",\"Engraçado\",\"Cheiroso\",\"Esperto\",\"Limpo\",\"Bagunceiro\",\"Carente\",\"Ativo\",\"Pelo Curto\",\"Pelo Médio\",\"Olhos Azuis\",\"Olhos Verdes\",\"Orelhas Pontudas\",\"Orelhas Caídas\",\"Cauda Longa\",\"Cauda Curta\",\"Pescoço Longo\",\"Patas Curtas\",\"Amigável com crianças\",\"Amigável com outros pets\",\"Gosta de água\",\"Não gosta de água\",\"Treinável\",\"Requer cuidados especiais\",\"Vocal\",\"Saltador\",\"Escavador\",\"Nadador\",\"Terrestre\",\"Arbóreo\",\"Noturno\",\"Diurno\",\"Mestiço\",\"Puro-sangue\",\"Resgatado\",\"Alergênico\",\"Hipoalergênico\",\"Grande apetite\",\"Pequeno apetite\",\"Gosta de colo\",\"Gosta de passear\"\r",
+									"];\r",
+									"\r",
+									"// Função para obter um item aleatório de um dos arrays\r",
+									"function getRandomItem(arr) {\r",
+									"    return arr[Math.floor(Math.random() * arr.length)];\r",
+									"}\r",
+									"// Função para gerar um ID aleatório de 4 dígitos\r",
+									"/* Explicação da lógica\r",
+									"\"Math.random()\": Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusivo);\r",
+									"\r",
+									"\"* 9000\": Multiplicando por 9000, você obtém um número decimal entre 0 e 8999;\r",
+									"\r",
+									"\"+ 1000\": Adicionando 1000, o intervalo se move para entre 1000 e 9999;\r",
+									"\r",
+									"\"Math.floor()\": Arredonda o número para o inteiro mais próximo, garantindo que você tenha um número sem casas decimais dentro do intervalo de 4 dígitos.\r",
+									"*/\r",
+									"function generateFourDigitId() {\r",
+									"    return Math.floor(1000 + Math.random() * 9000); \r",
+									"}\r",
+									"\r",
+									"// Gera dois nomes aleatórios e os une para criar um nome de pet mais variado\r",
+									"const part1OfName = getRandomItem(petNames);\r",
+									"let part2OfName = getRandomItem(petNames);\r",
+									"// Garante que o segundo nome seja diferente do primeiro para evitar repetição\r",
+									"while (part2OfName === part1OfName) {\r",
+									"    part2OfName = getRandomItem(petNames);\r",
+									"}\r",
+									"// Junção dos dois nomes\r",
+									"const randomPetName = `${part1OfName} ${part2OfName}`; \r",
+									"\r",
+									"// Seleciona uma categoria do array\r",
+									"const randomCategoryName = getRandomItem(animalCategories); \r",
+									"// Seleciona uma tag do array\r",
+									"const randomCustomTag = getRandomItem(customTags);\r",
+									"\r",
+									"// Geração de IDs de 4 dígitos\r",
+									"const petId = generateFourDigitId();\r",
+									"const categoryId = generateFourDigitId();\r",
+									"const tagId = generateFourDigitId();\r",
+									"const customTagId = generateFourDigitId();\r",
+									"\r",
+									"// Variáveis\r",
+									"pm.collectionVariables.set(\"part1OfName\", part1OfName);\r",
+									"pm.collectionVariables.set(\"part2OfName\", part2OfName);\r",
+									"pm.collectionVariables.set(\"petName\", randomPetName);\r",
+									"pm.collectionVariables.set(\"petCategoryName\", randomCategoryName);\r",
+									"//pm.collectionVariables.set(\"petId\", petId);\r",
+									"pm.collectionVariables.set(\"petCategoryId\", categoryId);\r",
+									"pm.collectionVariables.set(\"petTagId\", tagId);\r",
+									"pm.collectionVariables.set(\"petCustomTag\", randomCustomTag);\r",
+									"pm.collectionVariables.set(\"petCustomTagId\", customTagId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-5dce4f85-093f-477d-9111-f6109b074c0e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{IDPetupd}},\r\n  \"category\": {\r\n    \"id\": {{updpetCategoryId}},\r\n    \"name\": \"{{updpetCategoryName}}\"\r\n  },\r\n  \"name\": \"{{updpetName}}\",\r\n  \"photoUrls\": [\r\n    \"https://example.com/photos/{{updpart2OfName}}_{{updpart1OfName}}.jpg\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": {{updpetTagId}},\r\n      \"name\": \"{{updpetCustomTag}}\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://petstore.swagger.io/v2/pet' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Find pet by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f263e116-5a06-4215-baec-8ea8f5d2559c",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar busca de um pet pelo ID\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e751324a-4e78-4ec7-bf44-c3717f39b43f",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.collectionVariables.set(\"IDPet\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-5301e660-3f4f-4c4f-8ef6-73b757937891",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "api_key",
+								"value": "special-key"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{IDPet}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{IDPet}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/pet/456465' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
+					},
+					"response": []
+				},
+				{
+					"name": "Updates a pet in the store with form data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8abae018-62cd-47b0-a782-ebab5ec8a630",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar atualização do nome e status do pet\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3939b0ed-c0bf-4e70-b9b4-deb397bc44b8",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const validPets = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null && pet.name);\r",
+									"\r",
+									"    if (validPets.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    // Seleciona aleatoriamente um pet da lista filtrada\r",
+									"    const randomPet = validPets[Math.floor(Math.random() * validPets.length)];\r",
+									"\r",
+									"    // Armazena o ID e o nome para uso posterior\r",
+									"    pm.collectionVariables.set(\"IDPetupdfd\", randomPet.id);\r",
+									"    pm.collectionVariables.set(\"PetNameupdfd\", randomPet.name);\r",
+									"    console.log(\"IDPet selecionado:\", randomPet.id);\r",
+									"    console.log(\"Nome do pet selecionado:\", randomPet.name);\r",
+									"\r",
+									"    // Gera um status aleatório para alteração\r",
+									"    const statuses = [\"available\", \"pending\", \"sold\"];\r",
+									"    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];\r",
+									"    pm.collectionVariables.set(\"status\", randomStatus);\r",
+									"    console.log(\"Status aleatório definido:\", randomStatus);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-44406f80-00ba-4e25-bbc4-a880811a1517",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"type": "text",
+									"key": "name",
+									"value": "{{PetNameupdfd}}"
+								},
+								{
+									"type": "text",
+									"key": "status",
+									"value": "{{status}}"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{IDPetupdfd}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{IDPetupdfd}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/pet/4670' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/x-www-form-urlencoded' \\\r\n  -d 'name=aaaa&status=Sold'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fdd04672-bd9e-4c74-b815-5198afc2cf50",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar exclusão do cadastro de um pet\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d900e158-344d-41f8-994a-d23b9292a640",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.collectionVariables.set(\"IDPetDlt\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-007cdfa4-cbd4-482c-ab16-8db7e408c40a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "api_key",
+								"value": "special-key"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/pet/{{IDPetDlt}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"{{IDPetDlt}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/pet/4670' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'api_key: special-key'"
+					},
+					"response": []
+				}
+			],
+			"id": "46757820-825e53f5-899a-40b2-a498-551a9eb29500"
+		},
+		{
+			"name": "Store - Access to Petstore orders",
+			"item": [
+				{
+					"name": "Returns pet inventories by status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1583e6ac-f607-42a9-95f8-6c051685a653",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar lista de pedidos\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-685f85c7-499d-4095-a59f-757a3bdf3d77",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "api_key",
+								"value": "special-key"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://petstore.swagger.io/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/store/inventory",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"inventory"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://petstore.swagger.io/v2/store/inventory' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' \\\r\n  -H 'api_key: special-key' \\\r\n  -b 'cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://petstore.swagger.io/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'"
+					},
+					"response": []
+				},
+				{
+					"name": "Place an order for a pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d14a5343-8036-403c-ba52-fe5268df7309",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar criação de um pedido\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validar se retorna data atual\", function () {\r",
+									"    \r",
+									"    const responseShipDate = jsonData.shipDate; \r",
+									"    const today = new Date().toISOString().split('T')[0];\r",
+									"    const responseDatePart = responseShipDate.split('T')[0];\r",
+									"\r",
+									"    pm.expect(responseDatePart, 'Não retornou a data atual').to.eql(today);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f5b57a8f-f99d-490c-b27f-1b16a4582fc2",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.collectionVariables.set(\"IDPetOrder\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"// Obtém a data e hora atual (no formato ISO 8601) \r",
+									"    const dataAtual = new Date();\r",
+									"    const shipDate = dataAtual.toISOString();\r",
+									"    pm.collectionVariables.set(\"currentDate\", shipDate);\r",
+									"    console.log(\"Data de envio gerada e salva:\", shipDate);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-84032f91-d1ff-4d96-bbc1-d9e6e5d3f17b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "accept-language",
+								"value": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							},
+							{
+								"key": "origin",
+								"value": "https://petstore.swagger.io"
+							},
+							{
+								"key": "priority",
+								"value": "u=1, i"
+							},
+							{
+								"key": "referer",
+								"value": "https://petstore.swagger.io/"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\""
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+							},
+							{
+								"key": "Cookie",
+								"value": "cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"\",\n  \"petId\": {{IDPetOrder}},\n  \"quantity\": 2,\n  \"shipDate\": \"{{currentDate}}\",\n  \"status\": \"placed\",\n  \"complete\": true\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order"
+							]
+						},
+						"description": "Generated from cURL: curl 'https://petstore.swagger.io/v2/store/order' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7' \\\r\n  -H 'content-type: application/json' \\\r\n  -b 'cookiehub=eyJhbnN3ZXJlZCI6dHJ1ZSwicmV2aXNpb24iOjEsImRudCI6ZmFsc2UsImFsbG93U2FsZSI6ZmFsc2UsImltcGxpY3QiOmZhbHNlLCJyZWdpb24iOiJDNCIsInRva2VuIjoiNThnTmlDSFU4MFhMSFFmWWprUm01b0N5cjB2RnA5WDVQcWllc0VFbFJhbnNoQ0EyNHgzTzdteXNLTE5TeThuRSIsInRpbWVzdGFtcCI6IjIwMjUtMDctMTVUMDI6MTk6MTkuNzgxWiIsImFsbEFsbG93ZWQiOmZhbHNlLCJjYXRlZ29yaWVzIjpbXSwidmVuZG9ycyI6W10sInNlcnZpY2VzIjpbXSwiaW1wbGljaXQiOmZhbHNlfQ==; _conv_r=s%3Awww.google.com*m%3Aorganic*t%3A*c%3A; _ga=GA1.2.1059973253.1753142232; _conv_v=vi%3A1*sc%3A2*cs%3A1753759806*fs%3A1753142099*pv%3A3*exp%3A%7B%7D*ps%3A1753142099' \\\r\n  -H 'origin: https://petstore.swagger.io' \\\r\n  -H 'priority: u=1, i' \\\r\n  -H 'referer: https://petstore.swagger.io/' \\\r\n  -H 'sec-ch-ua: \"Not;A=Brand\";v=\"99\", \"Google Chrome\";v=\"139\", \"Chromium\";v=\"139\"' \\\r\n  -H 'sec-ch-ua-mobile: ?0' \\\r\n  -H 'sec-ch-ua-platform: \"Windows\"' \\\r\n  -H 'sec-fetch-dest: empty' \\\r\n  -H 'sec-fetch-mode: cors' \\\r\n  -H 'sec-fetch-site: same-origin' \\\r\n  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \\\r\n  --data-raw $'{\\n  \"id\": 9,\\n  \"petId\": 23,\\n  \"quantity\": 2,\\n  \"shipDate\": \"2025-08-14T00:17:25.005Z\",\\n  \"status\": \"placed\",\\n  \"complete\": true\\n}\\n\\n'"
+					},
+					"response": []
+				},
+				{
+					"name": "Find purchase order by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a6d8671c-dffb-43df-8762-b2e57171c293",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.collectionVariables.set(\"IDPetOrder2\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"// Obtém a data e hora atual (no formato ISO 8601) \r",
+									"    const dataAtual = new Date();\r",
+									"    const shipDate = dataAtual.toISOString();\r",
+									"    pm.collectionVariables.set(\"currentDate\", shipDate);\r",
+									"    console.log(\"Data de envio gerada e salva:\", shipDate);\r",
+									"});\r",
+									"// Gera um ID aleatório para o pedido\r",
+									"const randomOrderId = Math.floor(Math.random() * 10000) + 1;\r",
+									"pm.collectionVariables.set(\"randomOrderId\", randomOrderId);\r",
+									"console.log(\"ID do pedido aleatório gerado:\", randomOrderId);\r",
+									"\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/store/order`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"id\": pm.collectionVariables.get(\"randomOrderId\"),\r",
+									"            \"petId\": pm.collectionVariables.get(\"IDPetOrder2\"),\r",
+									"            \"quantity\": 2,\r",
+									"            \"shipDate\": pm.collectionVariables.get(\"currentDate\"),\r",
+									"            \"status\": \"placed\",\r",
+									"            \"complete\": true\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o pedido:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do pedido.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const orderId = res.json().id;\r",
+									"    pm.collectionVariables.set(\"IDOrderFind\", orderId);\r",
+									"    console.log(\"Pedido criado. ID do pedido salvo:\", orderId);\r",
+									"    });\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "653ecfe4-3a86-44e8-975d-671734e077ee",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar busca de um pedido\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-7ff70964-b9f3-49ed-b622-eec69b95f432",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order/{{IDOrderFind}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"{{IDOrderFind}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/store/order/5' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete purchase order by ID",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7fbb1d62-2584-4aa3-8311-4e9b3583d045",
+								"exec": [
+									"//Realiza uma requisição para obter o cadastro aleatório de um pet na API que busca por status\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/pet/findByStatus?status=available,pending,sold`,\r",
+									"    method: 'GET',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/json'\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao buscar pets por status:\", err || res.status);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const pets = res.json();\r",
+									"    const ids = pets\r",
+									"        .filter(pet => pet.id !== undefined && pet.id !== null)\r",
+									"        .map(pet => pet.id);\r",
+									"\r",
+									"    if (ids.length === 0) {\r",
+									"        console.log(\"Nenhum pet com ID encontrado. Parando execução.\");\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const randomId = ids[Math.floor(Math.random() * ids.length)];\r",
+									"    pm.collectionVariables.set(\"IDPetOrder2\", randomId);\r",
+									"    console.log(\"IDPet selecionado:\", randomId);\r",
+									"\r",
+									"// Obtém a data e hora atual (no formato ISO 8601) \r",
+									"    const dataAtual = new Date();\r",
+									"    const shipDate = dataAtual.toISOString();\r",
+									"    pm.collectionVariables.set(\"currentDate\", shipDate);\r",
+									"    console.log(\"Data de envio gerada e salva:\", shipDate);\r",
+									"});\r",
+									"// Gera um ID aleatório para o pedido\r",
+									"const randomOrderId = Math.floor(Math.random() * 10000) + 1;\r",
+									"pm.collectionVariables.set(\"randomOrderId\", randomOrderId);\r",
+									"console.log(\"ID do pedido aleatório gerado:\", randomOrderId);\r",
+									"\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/store/order`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            \"id\": pm.collectionVariables.get(\"randomOrderId\"),\r",
+									"            \"petId\": pm.collectionVariables.get(\"IDPetOrder2\"),\r",
+									"            \"quantity\": 2,\r",
+									"            \"shipDate\": pm.collectionVariables.get(\"currentDate\"),\r",
+									"            \"status\": \"placed\",\r",
+									"            \"complete\": true\r",
+									"        })\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o pedido:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do pedido.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    const orderId = res.json().id;\r",
+									"    pm.collectionVariables.set(\"IDOrderDel\", orderId);\r",
+									"    console.log(\"Pedido criado. ID do pedido salvo:\", orderId);\r",
+									"    });\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "39fe3601-76e8-49f0-a9e4-cdbba7c27acd",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar exclusão de um pedido\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-41d3940a-cfa8-4dd4-8ebd-f6577ccf0fea",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/store/order/{{IDOrderDel}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"store",
+								"order",
+								"{{IDOrderDel}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/store/order/5' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				}
+			],
+			"id": "46757820-a7764ec5-ec2c-4873-8df1-ed71d6d26a7f"
+		},
+		{
+			"name": "User - Operations about user",
+			"item": [
+				{
+					"name": "Create list of users with given input array",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "251e5bb3-d08c-4dce-acf6-c341359263e5",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '3' // Alterado para 3\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"    // Analisa a resposta JSON que agora é um array\r",
+									"    const usersData = res.json();\r",
+									"    let users = [];\r",
+									"\r",
+									"    // Itera sobre cada usuário recebido\r",
+									"    usersData.forEach((userData, index) => {\r",
+									"        const nomeCompleto = userData.nome;\r",
+									"        const email = userData.email;\r",
+									"        const celular = userData.celular;\r",
+									"\r",
+									"        const nomeParts = nomeCompleto.split(\" \");\r",
+									"        const firstName = nomeParts[0];\r",
+									"        const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"        const randomNumber = Math.floor(1000 + Math.random() * 9000);\r",
+									"        const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"        const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"        let password = '';\r",
+									"        for (let i = 0; i < 8; i++) {\r",
+									"            password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"        }\r",
+									"\r",
+									"        // Salva as variáveis de coleção com índices (ex: firstName1, firstName2, etc.)\r",
+									"        pm.collectionVariables.set(`firstName${index + 1}`, firstName);\r",
+									"        pm.collectionVariables.set(`lastName${index + 1}`, lastName);\r",
+									"        pm.collectionVariables.set(`email${index + 1}`, email);\r",
+									"        pm.collectionVariables.set(`phone${index + 1}`, celular);\r",
+									"        pm.collectionVariables.set(`username${index + 1}`, username);\r",
+									"        pm.collectionVariables.set(`password${index + 1}`, password);\r",
+									"\r",
+									"        // Cria um objeto para cada usuário\r",
+									"        users.push({\r",
+									"            \"id\": 0,\r",
+									"            \"username\": username,\r",
+									"            \"firstName\": firstName,\r",
+									"            \"lastName\": lastName,\r",
+									"            \"email\": email,\r",
+									"            \"password\": password,\r",
+									"            \"phone\": celular,\r",
+									"            \"userStatus\": 0\r",
+									"        });\r",
+									"\r",
+									"        // Logs para visualização no console\r",
+									"        console.log(`--- Dados do Usuário ${index + 1} ---`);\r",
+									"        console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"        console.log(\"Email:\", email);\r",
+									"        console.log(\"Username:\", username);\r",
+									"    });\r",
+									"\r",
+									"    // Salva o array de usuários como uma variável de coleção JSON\r",
+									"    pm.collectionVariables.set(\"usersArray\", JSON.stringify(users));\r",
+									"\r",
+									"    console.log(\"---\");\r",
+									"    console.log(\"Array de usuários completo salvo na variável 'usersArray'.\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1e656497-8ed6-47ad-a22c-2b729cdf9def",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar criação de usuários em massa\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-d230356e-b3e7-4e7e-bd97-df3bdd0b2dc2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"{{username1}}\",\r\n    \"firstName\": \"{{firstName1}}\",\r\n    \"lastName\": \"{{lastName1}}\",\r\n    \"email\": \"{{email1}}\",\r\n    \"password\": \"{{password1}}\",\r\n    \"phone\": \"{{phone1}}\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"{{username2}}\",\r\n    \"firstName\": \"{{firstName2}}\",\r\n    \"lastName\": \"{{lastName2}}\",\r\n    \"email\": \"{{email2}}\",\r\n    \"password\": \"{{password2}}\",\r\n    \"phone\": \"{{phone2}}\",\r\n    \"userStatus\": 0\r\n  },\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"{{username3}}\",\r\n    \"firstName\": \"{{firstName3}}\",\r\n    \"lastName\": \"{{lastName3}}\",\r\n    \"email\": \"{{email3}}\",\r\n    \"password\": \"{{password3}}\",\r\n    \"phone\": \"{{phone3}}\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user/createWithList",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"createWithList"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/user/createWithList' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '[\r\n  {\r\n    \"id\": 0,\r\n    \"username\": \"string\",\r\n    \"firstName\": \"string\",\r\n    \"lastName\": \"string\",\r\n    \"email\": \"string\",\r\n    \"password\": \"string\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n  }\r\n]'"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by user name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c67806cb-f150-4a3c-bfe4-50989a59ab5e",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"// eparar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"// Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Gera um número de 1000 a 9999\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"// Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"// Salvar as variáveis de ambiente para uso da requisição principal\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"// Logs para visualização no console\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"\r",
+									"});\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/user/createWithList`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify([{\r",
+									"        \"id\": 0,\r",
+									"        \"username\": pm.collectionVariables.get(\"username\"),\r",
+									"        \"firstName\": pm.collectionVariables.get(\"firstName\"),\r",
+									"        \"lastName\": pm.collectionVariables.get(\"lastName\"),\r",
+									"        \"email\": pm.collectionVariables.get(\"email\"),\r",
+									"        \"password\": pm.collectionVariables.get(\"password\"),\r",
+									"        \"phone\": pm.collectionVariables.get(\"phone\"),\r",
+									"        \"userStatus\": 0\r",
+									"        }])\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o usuário:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do usuário.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdUsername = pm.collectionVariables.get(\"username\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"usernameToSearch\", createdUsername);\r",
+									"\r",
+									"console.log(\"Username salvo para busca:\", pm.collectionVariables.get(\"usernameToSearch\"));\r",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e8f5a307-67fe-427d-bd01-c3a3dbe9d31a",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar busca de usuário por userName\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-0dd6792a-9fe2-4ab3-8f70-13dd93905074",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{usernameToSearch}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{usernameToSearch}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/aaaaa' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Updated user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e494ab53-b74c-456b-bbde-5917bbb9c406",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"// eparar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"// Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Gera um número de 1000 a 9999\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"// Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"// Salvar as variáveis de ambiente para uso da requisição principal\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"// Logs para visualização no console\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"\r",
+									"});\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/user/createWithList`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify([{\r",
+									"        \"id\": 0,\r",
+									"        \"username\": pm.collectionVariables.get(\"username\"),\r",
+									"        \"firstName\": pm.collectionVariables.get(\"firstName\"),\r",
+									"        \"lastName\": pm.collectionVariables.get(\"lastName\"),\r",
+									"        \"email\": pm.collectionVariables.get(\"email\"),\r",
+									"        \"password\": pm.collectionVariables.get(\"password\"),\r",
+									"        \"phone\": pm.collectionVariables.get(\"phone\"),\r",
+									"        \"userStatus\": 0\r",
+									"        }])\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o usuário:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do usuário.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdUsername = pm.collectionVariables.get(\"username\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"usernameToUpdate\", createdUsername);\r",
+									"\r",
+									"console.log(\"Username salvo para busca:\", pm.collectionVariables.get(\"usernameToUpdate\"));\r",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8d7bd9dc-df1d-43cb-aa39-37ab8704aaca",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar atualização de um usuário\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-3672d16c-ad68-4497-b7e2-a2fc2709fa32",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"username\": \"{{username}}\",\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"userStatus\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{usernameToUpdate}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{usernameToUpdate}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'PUT' \\\r\n  'https://petstore.swagger.io/v2/user/marliribeiromarli4948' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"id\": 9223372036854755121,\r\n    \"username\": \"marliribeiromarli4948\",\r\n    \"firstName\": \"Marli\",\r\n    \"lastName\": \"Marli Ribeiro\",\r\n    \"email\": \"marli_marli_ribeiro@gtx.ag\",\r\n    \"password\": \"ysuKyHfa\",\r\n    \"phone\": \"98984391789\",\r\n    \"userStatus\": 1\r\n}'"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "96b1a18c-a06a-4db4-8f50-9aecbf337886",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"// eparar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"// Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000);\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"// Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"// Salvar as variáveis de ambiente para uso da requisição principal\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"// Logs para visualização no console\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"\r",
+									"});\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/user/createWithList`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify([{\r",
+									"        \"id\": 0,\r",
+									"        \"username\": pm.collectionVariables.get(\"username\"),\r",
+									"        \"firstName\": pm.collectionVariables.get(\"firstName\"),\r",
+									"        \"lastName\": pm.collectionVariables.get(\"lastName\"),\r",
+									"        \"email\": pm.collectionVariables.get(\"email\"),\r",
+									"        \"password\": pm.collectionVariables.get(\"password\"),\r",
+									"        \"phone\": pm.collectionVariables.get(\"phone\"),\r",
+									"        \"userStatus\": 0\r",
+									"        }])\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o usuário:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do usuário.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdUsername = pm.collectionVariables.get(\"username\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"usernameToDelete\", createdUsername);\r",
+									"\r",
+									"console.log(\"Username salvo para busca:\", pm.collectionVariables.get(\"usernameToDelete\"));\r",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb543b57-5e7c-4e4d-835f-35364d087dba",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar exclusão de um usuário\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"    pm.expect(jsonData.message, 'UserName não retornou na resposta').to.contains(pm.collectionVariables.get(\"usernameToDelete\"))\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-76af5513-0f12-45e3-a825-9717fe0ca515",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/{{usernameToDelete}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"{{usernameToDelete}}"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/user/sdfsdf' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs user into the system",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0b76e07d-59ab-4728-9d6c-9fd31c182b8c",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"// eparar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"// Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Gera um número de 1000 a 9999\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"// Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"// Salvar as variáveis de ambiente para uso da requisição principal\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"// Logs para visualização no console\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"\r",
+									"});\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/user/createWithList`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify([{\r",
+									"        \"id\": 0,\r",
+									"        \"username\": pm.collectionVariables.get(\"username\"),\r",
+									"        \"firstName\": pm.collectionVariables.get(\"firstName\"),\r",
+									"        \"lastName\": pm.collectionVariables.get(\"lastName\"),\r",
+									"        \"email\": pm.collectionVariables.get(\"email\"),\r",
+									"        \"password\": pm.collectionVariables.get(\"password\"),\r",
+									"        \"phone\": pm.collectionVariables.get(\"phone\"),\r",
+									"        \"userStatus\": 0\r",
+									"        }])\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o usuário:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do usuário.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdUsername = pm.collectionVariables.get(\"username\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"usernameToLogin\", createdUsername);\r",
+									"\r",
+									"console.log(\"Username salvo para login:\", pm.collectionVariables.get(\"usernameToLogin\"));\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdPassword = pm.collectionVariables.get(\"password\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"passwordToLogin\", createdPassword);\r",
+									"\r",
+									"console.log(\"password salvo para login:\", pm.collectionVariables.get(\"passwordToLogin\"));\r",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "47c3af92-dd31-423a-bf1c-c6623d11b112",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar login no sistema\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"    pm.expect(jsonData.message, 'Sessão não iniciada').to.contains(\"logged in user session\")\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-458e7b45-6317-40d6-af5b-78f977825e9b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/login?username={{usernameToLogin}}&password={{passwordToLogin}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{usernameToLogin}}"
+								},
+								{
+									"key": "password",
+									"value": "{{passwordToLogin}}"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Logs out current logged in user session",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6a19b4c6-8975-4eb5-8eba-e1924e4260a7",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar logout no sistema\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-b872e2ca-37d0-4ddf-a05a-0df1c30fe943",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/logout",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"logout"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/logout' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "09ad5020-6198-43f9-a244-635ce454aaf5",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"// eparar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"// Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Gera um número de 1000 a 9999\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"// Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"// Salvar as variáveis de ambiente para uso da requisição principal\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"// Logs para visualização no console\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"---\");\r",
+									"    console.log(\"Dados formatados para a API:\");\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ba7f1056-d481-48a0-b245-40e4e129ea52",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar criação de usuário\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-25ce7710-212f-461e-9010-8c586b4aa8cf",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": 0,\r\n        \"username\": \"{{username}}\",\r\n        \"firstName\": \"{{firstName}}\",\r\n        \"lastName\": \"{{lastName}}\",\r\n        \"email\": \"{{email}}\",\r\n        \"password\": \"{{password}}\",\r\n        \"phone\": \"{{phone}}\",\r\n        \"userStatus\": 0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/v2/user",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/user' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": 0,\r\n  \"username\": \"string\",\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"phone\": \"string\",\r\n  \"userStatus\": 0\r\n}'"
+					},
+					"response": []
+				}
+			],
+			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "155c9222-6a1d-4ccc-b7b2-31c3443b6df2",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f3ca218d-11b7-4575-b3a7-dd1a5412da0a",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "IDPet",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "part1OfName",
+			"value": ""
+		},
+		{
+			"key": "part2OfName",
+			"value": ""
+		},
+		{
+			"key": "petName",
+			"value": ""
+		},
+		{
+			"key": "petCategoryName",
+			"value": ""
+		},
+		{
+			"key": "petId",
+			"value": ""
+		},
+		{
+			"key": "petCategoryId",
+			"value": ""
+		},
+		{
+			"key": "petTagId",
+			"value": ""
+		},
+		{
+			"key": "petCustomTag",
+			"value": ""
+		},
+		{
+			"key": "updpart1OfName",
+			"value": ""
+		},
+		{
+			"key": "updpart2OfName",
+			"value": ""
+		},
+		{
+			"key": "updpetName",
+			"value": ""
+		},
+		{
+			"key": "updpetCategoryName",
+			"value": ""
+		},
+		{
+			"key": "updpetCategoryId",
+			"value": ""
+		},
+		{
+			"key": "updpetTagId",
+			"value": ""
+		},
+		{
+			"key": "updpetCustomTag",
+			"value": ""
+		},
+		{
+			"key": "updpetCustomTagId",
+			"value": ""
+		},
+		{
+			"key": "updpetId",
+			"value": ""
+		},
+		{
+			"key": "petCustomTagId",
+			"value": ""
+		},
+		{
+			"key": "IDPetDlt",
+			"value": ""
+		},
+		{
+			"key": "IDOrderFind",
+			"value": ""
+		},
+		{
+			"key": "IDOrderFind2",
+			"value": ""
+		},
+		{
+			"key": "IDOrderFind3",
+			"value": ""
+		},
+		{
+			"key": "randomOrderId",
+			"value": ""
+		},
+		{
+			"key": "randomOrderId2",
+			"value": ""
+		},
+		{
+			"key": "IDPetOrder2",
+			"value": ""
+		},
+		{
+			"key": "currentDate",
+			"value": ""
+		},
+		{
+			"key": "IDOrderDel",
+			"value": ""
+		},
+		{
+			"key": "IDPetupdfd",
+			"value": ""
+		},
+		{
+			"key": "PetNameupdfd",
+			"value": ""
+		},
+		{
+			"key": "status",
+			"value": ""
+		},
+		{
+			"key": "IDPetOrder",
+			"value": ""
+		},
+		{
+			"key": "firstName",
+			"value": ""
+		},
+		{
+			"key": "lastName",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "phone",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "usernameToSearch",
+			"value": ""
+		},
+		{
+			"key": "usernameToUpdate",
+			"value": ""
+		},
+		{
+			"key": "usernameToDelete",
+			"value": ""
+		},
+		{
+			"key": "usernameToLogin",
+			"value": ""
+		},
+		{
+			"key": "passwordToLogin",
+			"value": ""
+		},
+		{
+			"key": "firstName1",
+			"value": ""
+		},
+		{
+			"key": "lastName1",
+			"value": ""
+		},
+		{
+			"key": "email1",
+			"value": ""
+		},
+		{
+			"key": "phone1",
+			"value": ""
+		},
+		{
+			"key": "username1",
+			"value": ""
+		},
+		{
+			"key": "password1",
+			"value": ""
+		},
+		{
+			"key": "firstName2",
+			"value": ""
+		},
+		{
+			"key": "lastName2",
+			"value": ""
+		},
+		{
+			"key": "email2",
+			"value": ""
+		},
+		{
+			"key": "phone2",
+			"value": ""
+		},
+		{
+			"key": "username2",
+			"value": ""
+		},
+		{
+			"key": "password2",
+			"value": ""
+		},
+		{
+			"key": "firstName3",
+			"value": ""
+		},
+		{
+			"key": "lastName3",
+			"value": ""
+		},
+		{
+			"key": "email3",
+			"value": ""
+		},
+		{
+			"key": "phone3",
+			"value": ""
+		},
+		{
+			"key": "username3",
+			"value": ""
+		},
+		{
+			"key": "password3",
+			"value": ""
+		},
+		{
+			"key": "usersArray",
+			"value": ""
+		}
+	]
+}
