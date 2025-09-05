@@ -1935,51 +1935,200 @@
 						"description": "Generated from cURL: curl -X 'DELETE' \\\r\n  'https://petstore.swagger.io/v2/user/sdfsdf' \\\r\n  -H 'accept: application/json'"
 					},
 					"response": []
+				},
+				{
+					"name": "Logs user into the system",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0b76e07d-59ab-4728-9d6c-9fd31c182b8c",
+								"exec": [
+									"// Faz a requisição para o site 4Devs para gerar os dados de entrada\r",
+									"pm.sendRequest({\r",
+									"    url: 'https://www.4devs.com.br/ferramentas_online.php',\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'Content-Type': 'application/x-www-form-urlencoded'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'urlencoded',\r",
+									"        urlencoded: [{\r",
+									"            key: 'acao',\r",
+									"            value: 'gerar_pessoa'\r",
+									"        }, {\r",
+									"            key: 'sexo',\r",
+									"            value: 'I'\r",
+									"        }, {\r",
+									"            key: 'pontuacao',\r",
+									"            value: 'C'\r",
+									"        }, {\r",
+									"            key: 'idade',\r",
+									"            value: '0'\r",
+									"        }, {\r",
+									"            key: 'cep_estado',\r",
+									"            value: ''\r",
+									"        }, {\r",
+									"            key: 'txt_qtde',\r",
+									"            value: '1'\r",
+									"        }, {\r",
+									"            key: 'cep_cidade',\r",
+									"            value: ''\r",
+									"        }]\r",
+									"    }\r",
+									"}, function(err, res) {\r",
+									"    if (err) {\r",
+									"        console.error(\"Erro ao buscar dados do 4Devs:\", err);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Analisa a resposta JSON\r",
+									"    const userData = res.json()[0];\r",
+									"    const nomeCompleto = userData.nome;\r",
+									"    const email = userData.email;\r",
+									"    const celular = userData.celular;\r",
+									"\r",
+									"// eparar o nome completo em firstName e lastName\r",
+									"    const nomeParts = nomeCompleto.split(\" \");\r",
+									"    const firstName = nomeParts[0];\r",
+									"    const lastName = nomeParts.slice(1).join(\" \");\r",
+									"\r",
+									"// Gerar 4 dígitos numéricos aleatórios para o username\r",
+									"    const randomNumber = Math.floor(1000 + Math.random() * 9000); // Gera um número de 1000 a 9999\r",
+									"    const username = `${lastName.toLowerCase().replace(/\\s/g, '')}${firstName.toLowerCase()}${randomNumber}`;\r",
+									"\r",
+									"// Gerar uma senha com 8 caracteres aleatórios (letras e números)\r",
+									"    const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let password = '';\r",
+									"    for (let i = 0; i < 8; i++) {\r",
+									"        password += caracteres.charAt(Math.floor(Math.random() * caracteres.length));\r",
+									"    }\r",
+									"\r",
+									"// Salvar as variáveis de ambiente para uso da requisição principal\r",
+									"    pm.collectionVariables.set(\"firstName\", firstName);\r",
+									"    pm.collectionVariables.set(\"lastName\", lastName);\r",
+									"    pm.collectionVariables.set(\"email\", email);\r",
+									"    pm.collectionVariables.set(\"phone\", celular);\r",
+									"    pm.collectionVariables.set(\"username\", username);\r",
+									"    pm.collectionVariables.set(\"password\", password);\r",
+									"\r",
+									"// Logs para visualização no console\r",
+									"    console.log(\"Dados do 4Devs gerados:\");\r",
+									"    console.log(\"Nome Completo:\", nomeCompleto);\r",
+									"    console.log(\"First Name:\", firstName);\r",
+									"    console.log(\"Last Name:\", lastName);\r",
+									"    console.log(\"Email:\", email);\r",
+									"    console.log(\"Telefone:\", celular);\r",
+									"    console.log(\"Username:\", username);\r",
+									"    console.log(\"Password:\", password);\r",
+									"\r",
+									"});\r",
+									"// Realiza uma segunda requisição para criar um pedido e obter o ID dele\r",
+									"pm.sendRequest({\r",
+									"    url: `${pm.environment.get(\"baseURL\")}/v2/user/createWithList`,\r",
+									"    method: 'POST',\r",
+									"    header: {\r",
+									"        'accept': 'application/json',\r",
+									"        'content-type': 'application/json',\r",
+									"        'api_key': 'special-key'\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify([{\r",
+									"        \"id\": 0,\r",
+									"        \"username\": pm.collectionVariables.get(\"username\"),\r",
+									"        \"firstName\": pm.collectionVariables.get(\"firstName\"),\r",
+									"        \"lastName\": pm.collectionVariables.get(\"lastName\"),\r",
+									"        \"email\": pm.collectionVariables.get(\"email\"),\r",
+									"        \"password\": pm.collectionVariables.get(\"password\"),\r",
+									"        \"phone\": pm.collectionVariables.get(\"phone\"),\r",
+									"        \"userStatus\": 0\r",
+									"        }])\r",
+									"    }\r",
+									"}, function (err, res) {\r",
+									"    if (err || res.code !== 200) {\r",
+									"        console.error(\"Erro ao criar o usuário:\", err || res.status);\r",
+									"        pm.test(\"Falha no pré-requisito: Erro na criação do usuário.\", false);\r",
+									"        return;\r",
+									"    }\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdUsername = pm.collectionVariables.get(\"username\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"usernameToLogin\", createdUsername);\r",
+									"\r",
+									"console.log(\"Username salvo para login:\", pm.collectionVariables.get(\"usernameToLogin\"));\r",
+									"\r",
+									"// Obtém o valor da variável de coleção 'username' que foi usada para criar o usuário\r",
+									"const createdPassword = pm.collectionVariables.get(\"password\");\r",
+									"\r",
+									"// Salva o username em uma nova variável de coleção, para ser usado em outra requisição\r",
+									"pm.collectionVariables.set(\"passwordToLogin\", createdPassword);\r",
+									"\r",
+									"console.log(\"password salvo para login:\", pm.collectionVariables.get(\"passwordToLogin\"));\r",
+									"    });"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "47c3af92-dd31-423a-bf1c-c6623d11b112",
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.test(\"Validar login no sistema\", () => {\r",
+									"\r",
+									"    pm.expect(pm.response.code, 'Status diferente de 200').to.eql(200);\r",
+									"    pm.expect(jsonData.message, 'Sessão não iniciada').to.contains(\"logged in user session\")\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "46757820-458e7b45-6317-40d6-af5b-78f977825e9b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/v2/user/login?username={{usernameToLogin}}&password={{passwordToLogin}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"v2",
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "{{usernameToLogin}}"
+								},
+								{
+									"key": "password",
+									"value": "{{passwordToLogin}}"
+								}
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
-		},
-		{
-			"name": "Logs user into the system",
-			"id": "46757820-458e7b45-6317-40d6-af5b-78f977825e9b",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd",
-					"protocol": "https",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"user",
-						"login"
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "asdasdasd"
-						},
-						{
-							"key": "password",
-							"value": "asdasdasd"
-						}
-					]
-				},
-				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd' \\\r\n  -H 'accept: application/json'"
-			},
-			"response": []
 		}
 	],
 	"event": [
