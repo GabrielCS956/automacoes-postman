@@ -2523,6 +2523,82 @@
 		{
 			"key": "passwordToLogin",
 			"value": ""
+		},
+		{
+			"key": "firstName1",
+			"value": ""
+		},
+		{
+			"key": "lastName1",
+			"value": ""
+		},
+		{
+			"key": "email1",
+			"value": ""
+		},
+		{
+			"key": "phone1",
+			"value": ""
+		},
+		{
+			"key": "username1",
+			"value": ""
+		},
+		{
+			"key": "password1",
+			"value": ""
+		},
+		{
+			"key": "firstName2",
+			"value": ""
+		},
+		{
+			"key": "lastName2",
+			"value": ""
+		},
+		{
+			"key": "email2",
+			"value": ""
+		},
+		{
+			"key": "phone2",
+			"value": ""
+		},
+		{
+			"key": "username2",
+			"value": ""
+		},
+		{
+			"key": "password2",
+			"value": ""
+		},
+		{
+			"key": "firstName3",
+			"value": ""
+		},
+		{
+			"key": "lastName3",
+			"value": ""
+		},
+		{
+			"key": "email3",
+			"value": ""
+		},
+		{
+			"key": "phone3",
+			"value": ""
+		},
+		{
+			"key": "username3",
+			"value": ""
+		},
+		{
+			"key": "password3",
+			"value": ""
+		},
+		{
+			"key": "usersArray",
+			"value": ""
 		}
 	]
 }
