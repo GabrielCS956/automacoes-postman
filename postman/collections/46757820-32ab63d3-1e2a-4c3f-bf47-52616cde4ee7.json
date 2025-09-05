@@ -2126,41 +2126,41 @@
 						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/login?username=asdasdasd&password=asdasdasd' \\\r\n  -H 'accept: application/json'"
 					},
 					"response": []
+				},
+				{
+					"name": "https://petstore.swagger.io/v2/user/logout",
+					"id": "46757820-b872e2ca-37d0-4ddf-a05a-0df1c30fe943",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/user/logout",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"user",
+								"logout"
+							]
+						},
+						"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/logout' \\\r\n  -H 'accept: application/json'"
+					},
+					"response": []
 				}
 			],
 			"id": "46757820-cf2c60e3-0c76-4fbe-a826-a903c9506a81"
-		},
-		{
-			"name": "https://petstore.swagger.io/v2/user/logout",
-			"id": "46757820-b872e2ca-37d0-4ddf-a05a-0df1c30fe943",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "accept",
-						"value": "application/json"
-					}
-				],
-				"url": {
-					"raw": "https://petstore.swagger.io/v2/user/logout",
-					"protocol": "https",
-					"host": [
-						"petstore",
-						"swagger",
-						"io"
-					],
-					"path": [
-						"v2",
-						"user",
-						"logout"
-					]
-				},
-				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/user/logout' \\\r\n  -H 'accept: application/json'"
-			},
-			"response": []
 		}
 	],
 	"event": [
